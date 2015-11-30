@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Make bash exit on any error, in piped commands or otherwise
+set -e
+set -o pipefail
+
 echo Cleaning...
 rm -rf ./dist
 
