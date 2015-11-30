@@ -1,17 +1,19 @@
 #!/bin/bash
 
-echo Cleaning...
-rm -rf ./dist
+echo
+echo Pushing development docker
+echo --------------------------
+cd vagrant
+vagrant ssh -c 'docker login -u eggert && docker push eggert/hgop2015'
+cd ..
 
-echo Building app
-grunt
+echo
+echo Pulling docker image into test
+echo ------------------------------
+cd ../testenv/
+vagrant ssh -c 'docker kill $(docker ps -q) && docker rm $(docker ps -a -q)'
+vagrant ssh -c 'docker pull eggert/hgop2015 && docker run -p 9000:8080 -d -e "NODE_ENV=production" eggert/hgop2015'
+cd ../tictactoe/
 
-cp ./Dockerfile ./dist/
-
-cd dist
-npm install --production
-
-echo Building docker image
-docker build -t eggert/hgop2015 .
-
-echo "Done"
+echo
+echo Done
