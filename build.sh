@@ -9,9 +9,10 @@ set -e
 set -o pipefail
 
 # Prepare tmp directory for building
-rm -rf /tmp/src
-mkdir -p /tmp/src
-cd /tmp/src
+cd ~
+rm -rf build/
+mkdir build/
+cd build/
 
 # Get code and install dependencies
 git clone https://$GIT_USER:$GIT_PASS@github.com/eggertj12/hgop2015.git
