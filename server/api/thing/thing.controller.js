@@ -21,7 +21,7 @@ exports.index = function(req, res) {
   name : 'Server and Client integration',
   info : 'Built with a powerful and fun stack: MongoDB, Express, AngularJS, and Node.'
   }, {
-  name : 'Smart Build System',
+  name : 'Smart Building System',
   info : 'Build system ignores `spec` files, allowing you to keep tests alongside code. Automatic injection of scripts and styles into your index.html'
   },  {
   name : 'Modular Structure',
