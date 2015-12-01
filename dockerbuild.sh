@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Make sure docker is running
+docker ps > /dev/null
+if [ $? -ne 0 ] ;
+	then echo ;
+	echo Starting docker ;
+	echo --------------- ;
+	sudo service docker start ;
+fi
+
 # Make bash exit on any error, in piped commands or otherwise
 set -e
 set -o pipefail

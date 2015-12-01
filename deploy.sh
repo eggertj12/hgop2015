@@ -16,11 +16,6 @@ fi
 set -e
 set -o pipefail
 
-# echo
-# echo Build the docker image
-# echo ----------------------
-# ./dockerbuild.sh
-
 echo
 echo Pushing development docker
 echo --------------------------
