@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Require github credentials as environment variables
-: "${GIT_USER:?Need to set GIT_USER environment variable}"
-: "${GIT_PASS:?Need to set GIT_PASS environment variable}"
+# # Require github credentials as environment variables
+# : "${GIT_USER:?Need to set GIT_USER environment variable}"
+# : "${GIT_PASS:?Need to set GIT_PASS environment variable}"
 
 # Make bash exit on any error, in piped commands or otherwise
 set -e
