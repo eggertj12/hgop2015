@@ -26,13 +26,12 @@ module.exports = function tictactoeCommandHandler(events) {
 
 	/**
 	 * Check if given commmand is a valid move
-	 * returns false on invalid move, true otherwise
+	 * returns event name on invalid move, undefined otherwise
 	 */
 	var checkMove = function(cmd, state) {
 		if (state.board[cmd.boardY][cmd.boardX] !== '') {
-			return false;
+			return 'AlreadyFilled';
 		}
-		return true;
 	};
 
 	var handlers = {
@@ -98,10 +97,11 @@ module.exports = function tictactoeCommandHandler(events) {
 			
 			gameState = buildBoard(events, gameState);
 			
-			if (!checkMove(cmd, gameState)) {
+			var result = checkMove(cmd, gameState); 
+			if (result !== undefined) {
 				return [{
 					id: cmd.id,
-					event: 'IllegalMove',
+					event: result,
 					gameName: cmd.gameName,
 					userName: cmd.userName,
 					timeStamp: cmd.timeStamp
