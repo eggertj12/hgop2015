@@ -126,6 +126,37 @@ describe('place move command', function(){
 		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
+
+	it('should not place move if game not full', function() {
+		given = [{
+			id: '5374',
+			event:'GameCreated',
+			userName : 'Freyja',
+			gameName : 'SomeGame',
+			timeStamp: '2015.12.02T09:29:44'
+		}];
+		when = {
+			id: '7483',
+			command:'PlaceMove',
+			boardX: '0',
+			boardY: '0',
+			player: 'X',
+			gameName: 'SomeGame',
+			userName : 'Eggert',
+			timeStamp: '2015.12.02T09:36:00'
+		};
+		then = [{
+			id: '7483',
+			event:'GameNotReady',
+			gameName: 'SomeGame',
+			userName : 'Eggert',
+			timeStamp: '2015.12.02T09:36:00'
+		}];
+
+		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+	});
+
 });
 
 

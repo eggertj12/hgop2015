@@ -1,6 +1,7 @@
 module.exports = function tictactoeCommandHandler(events) {
 	'use strict';
 	var gameCreatedEvent = events[0];
+	var gameJoinedEvent = events[1];
 
 	var handlers = {
 		'CreateGame': function (cmd) {
@@ -34,13 +35,25 @@ module.exports = function tictactoeCommandHandler(events) {
 		},
 
 		'PlaceMove': function (cmd) {
-			return [{
-				id: cmd.id,
-				event: 'GameNotFound',
-				gameName: cmd.gameName,
-				userName: cmd.userName,
-				timeStamp: cmd.timeStamp
-			}];
+			if (gameCreatedEvent === undefined) {
+				return [{
+					id: cmd.id,
+					event: 'GameNotFound',
+					gameName: cmd.gameName,
+					userName: cmd.userName,
+					timeStamp: cmd.timeStamp
+				}];
+			}
+
+			if (gameJoinedEvent === undefined) {
+				return [{
+					id: cmd.id,
+					event: 'GameNotReady',
+					gameName: cmd.gameName,
+					userName: cmd.userName,
+					timeStamp: cmd.timeStamp
+				}];
+			}
 		}
 	};
 
