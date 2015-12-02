@@ -288,7 +288,7 @@ describe('place move command', function () {
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
 
-	it('should not allow Y to move first', function () {
+	it('should not allow O to move first', function () {
 		var moves = [];
 		given = createGameEvents(moves);
 		when = {
@@ -296,7 +296,7 @@ describe('place move command', function () {
 			command: 'PlaceMove',
 			boardX: '0',
 			boardY: '0',
-			player: 'Y',
+			player: 'O',
 			gameName: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T15:00:00'
@@ -323,7 +323,7 @@ describe('place move command', function () {
 			{
 				boardX : '1',
 				boardY : '1',
-				player : 'Y'
+				player : 'O'
 			},	
 			{
 				boardX : '0',
@@ -364,7 +364,7 @@ describe('place move command', function () {
 			{
 				boardX : '1',
 				boardY : '1',
-				player : 'Y'
+				player : 'O'
 			},	
 			{
 				boardX : '0',
@@ -374,7 +374,7 @@ describe('place move command', function () {
 			{
 				boardX : '1',
 				boardY : '0',
-				player : 'Y'
+				player : 'O'
 			}			
 		];
 		given = createGameEvents(moves);
@@ -411,7 +411,7 @@ describe('place move command', function () {
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
 
-	it('should allow Y to win on a row', function () {
+	it('should allow O to win on a row', function () {
 		var moves = [
 			{
 				boardX : '0',
@@ -421,7 +421,7 @@ describe('place move command', function () {
 			{
 				boardX : '1',
 				boardY : '1',
-				player : 'Y'
+				player : 'O'
 			},	
 			{
 				boardX : '0',
@@ -431,7 +431,7 @@ describe('place move command', function () {
 			{
 				boardX : '0',
 				boardY : '1',
-				player : 'Y'
+				player : 'O'
 			},	
 			{
 				boardX : '2',
@@ -445,7 +445,7 @@ describe('place move command', function () {
 			command: 'PlaceMove',
 			boardX: '2',
 			boardY: '1',
-			player: 'Y',
+			player: 'O',
 			gameName: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:18:53'
@@ -455,7 +455,7 @@ describe('place move command', function () {
 			event: 'MovePlaced',
 			boardX: '2',
 			boardY: '1',
-			player: 'Y',
+			player: 'O',
 			gameName: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:18:53'
@@ -463,7 +463,7 @@ describe('place move command', function () {
 		{
 			id: '977',
 			event: 'GameWon',
-			winningPlayer: 'Y',
+			winningPlayer: 'O',
 			gameName: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:18:53'
@@ -483,7 +483,7 @@ describe('place move command', function () {
 			{
 				boardX : '1',
 				boardY : '0',
-				player : 'Y'
+				player : 'O'
 			},	
 			{
 				boardX : '2',
@@ -493,7 +493,7 @@ describe('place move command', function () {
 			{
 				boardX : '2',
 				boardY : '0',
-				player : 'Y'
+				player : 'O'
 			}			
 		];
 		given = createGameEvents(moves);
@@ -530,7 +530,7 @@ describe('place move command', function () {
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
 
-	it('should allow Y to win on diagonal from 0,2 to 2,0', function () {
+	it('should allow O to win on diagonal from 0,2 to 2,0', function () {
 		var moves = [
 			{
 				boardX : '0',
@@ -540,7 +540,7 @@ describe('place move command', function () {
 			{
 				boardX : '2',
 				boardY : '0',
-				player : 'Y'
+				player : 'O'
 			},	
 			{
 				boardX : '1',
@@ -550,7 +550,7 @@ describe('place move command', function () {
 			{
 				boardX : '0',
 				boardY : '2',
-				player : 'Y'
+				player : 'O'
 			},	
 			{
 				boardX : '0',
@@ -564,7 +564,7 @@ describe('place move command', function () {
 			command: 'PlaceMove',
 			boardX: '1',
 			boardY: '1',
-			player: 'Y',
+			player: 'O',
 			gameName: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:29:07'
@@ -574,7 +574,7 @@ describe('place move command', function () {
 			event: 'MovePlaced',
 			boardX: '1',
 			boardY: '1',
-			player: 'Y',
+			player: 'O',
 			gameName: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:29:07'
@@ -582,7 +582,7 @@ describe('place move command', function () {
 		{
 			id: '977',
 			event: 'GameWon',
-			winningPlayer: 'Y',
+			winningPlayer: 'O',
 			gameName: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:29:07'
@@ -602,7 +602,7 @@ describe('place move command', function () {
 			{
 				boardX : '0',
 				boardY : '0',
-				player : 'Y'
+				player : 'O'
 			},	
 			{
 				boardX : '2',
@@ -612,7 +612,7 @@ describe('place move command', function () {
 			{
 				boardX : '2',
 				boardY : '0',
-				player : 'Y'
+				player : 'O'
 			},	
 			{
 				boardX : '1',
@@ -622,7 +622,7 @@ describe('place move command', function () {
 			{
 				boardX : '0',
 				boardY : '1',
-				player : 'Y'
+				player : 'O'
 			},	
 			{
 				boardX : '0',
@@ -632,7 +632,7 @@ describe('place move command', function () {
 			{
 				boardX : '1',
 				boardY : '2',
-				player : 'Y'
+				player : 'O'
 			}			
 		];
 		given = createGameEvents(moves);

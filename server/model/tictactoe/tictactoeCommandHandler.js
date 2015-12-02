@@ -38,7 +38,7 @@ module.exports = function tictactoeCommandHandler(events) {
 		if (cmd.player === 'X' && (state.numberOfMoves % 2) === 1) {
 			return 'InvalidPlayer';
 		}
-		if (cmd.player === 'Y' && (state.numberOfMoves % 2) === 0) {
+		if (cmd.player === 'O' && (state.numberOfMoves % 2) === 0) {
 			return 'InvalidPlayer';
 		}
 	};
