@@ -312,4 +312,45 @@ describe('place move command', function () {
 		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
+
+	it('should not allow X to move after 3 moves', function () {
+		var moves = [
+			{
+				boardX : '0',
+				boardY : '0',
+				player : 'X'
+			},	
+			{
+				boardX : '1',
+				boardY : '1',
+				player : 'Y'
+			},	
+			{
+				boardX : '0',
+				boardY : '1',
+				player : 'X'
+			}			
+		];
+		given = createGameEvents(moves);
+		when = {
+			id: '977',
+			command: 'PlaceMove',
+			boardX: '0',
+			boardY: '2',
+			player: 'X',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T16:35:00'
+		};
+		then = [{
+			id: '977',
+			event: 'InvalidPlayer',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T16:35:00'
+		}];
+
+		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+	});
 });
