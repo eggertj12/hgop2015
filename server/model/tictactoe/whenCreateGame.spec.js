@@ -472,4 +472,62 @@ describe('place move command', function () {
 		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
+
+
+	it('should allow X to win on diagonal from 0,0 to 2,2', function () {
+		var moves = [
+			{
+				boardX : '0',
+				boardY : '0',
+				player : 'X'
+			},	
+			{
+				boardX : '1',
+				boardY : '0',
+				player : 'Y'
+			},	
+			{
+				boardX : '2',
+				boardY : '2',
+				player : 'X'
+			},	
+			{
+				boardX : '2',
+				boardY : '0',
+				player : 'Y'
+			}			
+		];
+		given = createGameEvents(moves);
+		when = {
+			id: '977',
+			command: 'PlaceMove',
+			boardX: '1',
+			boardY: '1',
+			player: 'X',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T17:24:57'
+		};
+		then = [{
+			id: '977',
+			event: 'MovePlaced',
+			boardX: '1',
+			boardY: '1',
+			player: 'X',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T17:24:57'
+		},
+		{
+			id: '977',
+			event: 'GameWon',
+			winningPlayer: 'X',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T17:24:57'
+		}];
+
+		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+	});
 });

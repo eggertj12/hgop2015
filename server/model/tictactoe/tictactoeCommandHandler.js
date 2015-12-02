@@ -62,6 +62,12 @@ module.exports = function tictactoeCommandHandler(events) {
 				return rowFirst;
 			}
 		}
+
+		// Check for winning diagonal 0,0 to 2,2
+		var diagFirst = state.board[0][0];
+		if (diagFirst !== '' && (diagFirst === state.board[1][1]) && (diagFirst === state.board[2][2])) {
+			return diagFirst;
+		}
 	};
 
 	var handlers = {
