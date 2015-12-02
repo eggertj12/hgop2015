@@ -156,6 +156,7 @@ module.exports = function tictactoeCommandHandler(events) {
 			
 			// Place move on board
 			gameState.board[cmd.boardY][cmd.boardX] = cmd.player;
+			gameState.numberOfMoves++;
 			
 			var placedEvent = {
 				id: cmd.id,
@@ -168,6 +169,7 @@ module.exports = function tictactoeCommandHandler(events) {
 				timeStamp: cmd.timeStamp
 			}; 
 
+			// Check for winning
 			result = gameWon(cmd, gameState);
 			if (result !== undefined) {
 				var wonEvent = {
@@ -182,6 +184,20 @@ module.exports = function tictactoeCommandHandler(events) {
 				return [placedEvent, wonEvent];
 			}
 			
+			// Finally check for draw
+			if (gameState.numberOfMoves === 9) {
+				var drawnEvent = {
+					id: cmd.id,
+					event: 'GameDrawn',
+					gameName: cmd.gameName,
+					userName: cmd.userName,
+					timeStamp: cmd.timeStamp
+				};
+				
+				return [placedEvent, drawnEvent];
+			}
+			
+			// No fail or end condition true. Just place the move.
 			return [placedEvent];
 		}
 	};
