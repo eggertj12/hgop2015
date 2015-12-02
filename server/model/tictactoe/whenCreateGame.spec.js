@@ -353,4 +353,123 @@ describe('place move command', function () {
 		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
+
+	it('should allow X to win on a column', function () {
+		var moves = [
+			{
+				boardX : '0',
+				boardY : '0',
+				player : 'X'
+			},	
+			{
+				boardX : '1',
+				boardY : '1',
+				player : 'Y'
+			},	
+			{
+				boardX : '0',
+				boardY : '1',
+				player : 'X'
+			},	
+			{
+				boardX : '1',
+				boardY : '0',
+				player : 'Y'
+			}			
+		];
+		given = createGameEvents(moves);
+		when = {
+			id: '977',
+			command: 'PlaceMove',
+			boardX: '0',
+			boardY: '2',
+			player: 'X',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T17:01:13'
+		};
+		then = [{
+			id: '977',
+			event: 'MovePlaced',
+			boardX: '0',
+			boardY: '2',
+			player: 'X',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T17:01:13'
+		},
+		{
+			id: '977',
+			event: 'GameWon',
+			winningPlayer: 'X',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T17:01:13'
+		}];
+
+		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+	});
+
+	it('should allow Y to win on a row', function () {
+		var moves = [
+			{
+				boardX : '0',
+				boardY : '0',
+				player : 'X'
+			},	
+			{
+				boardX : '1',
+				boardY : '1',
+				player : 'Y'
+			},	
+			{
+				boardX : '0',
+				boardY : '2',
+				player : 'X'
+			},	
+			{
+				boardX : '0',
+				boardY : '1',
+				player : 'Y'
+			},	
+			{
+				boardX : '2',
+				boardY : '2',
+				player : 'X'
+			}			
+		];
+		given = createGameEvents(moves);
+		when = {
+			id: '977',
+			command: 'PlaceMove',
+			boardX: '2',
+			boardY: '1',
+			player: 'Y',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T17:18:53'
+		};
+		then = [{
+			id: '977',
+			event: 'MovePlaced',
+			boardX: '2',
+			boardY: '1',
+			player: 'Y',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T17:18:53'
+		},
+		{
+			id: '977',
+			event: 'GameWon',
+			winningPlayer: 'Y',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T17:18:53'
+		}];
+
+		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+	});
 });

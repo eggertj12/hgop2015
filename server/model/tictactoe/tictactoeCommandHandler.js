@@ -42,6 +42,27 @@ module.exports = function tictactoeCommandHandler(events) {
 			return 'InvalidPlayer';
 		}
 	};
+	
+	/**
+	 * Check if game is won
+	 */
+	var gameWon = function(cmd, state) {
+		// Check for winning column
+		for (var i = 0; i < 3; i++) {
+			var colFirst = state.board[0][i];
+			if (colFirst !== '' && (colFirst === state.board[1][i]) && (colFirst === state.board[1][i])) {
+				return colFirst;
+			}
+		}
+
+		// Check for winning row
+		for (var i = 0; i < 3; i++) {
+			var rowFirst = state.board[i][0];
+			if (rowFirst !== '' && (rowFirst === state.board[i][1]) && (rowFirst === state.board[i][2])) {
+				return rowFirst;
+			}
+		}
+	};
 
 	var handlers = {
 		'CreateGame': function (cmd) {
@@ -84,6 +105,8 @@ module.exports = function tictactoeCommandHandler(events) {
 		},
 
 		'PlaceMove': function (cmd) {
+			
+			// First check for valid game
 			if (gameCreatedEvent === undefined) {
 				return [{
 					id: cmd.id,
@@ -104,8 +127,10 @@ module.exports = function tictactoeCommandHandler(events) {
 				}];
 			}
 			
+			// Game is valid, create state
 			gameState = buildBoard(events, gameState);
 			
+			// Check for valid move
 			var result = checkMove(cmd, gameState); 
 			if (result !== undefined) {
 				return [{
@@ -117,7 +142,10 @@ module.exports = function tictactoeCommandHandler(events) {
 				}];
 			}
 			
-			return [{
+			// Place move on board
+			gameState.board[cmd.boardY][cmd.boardX] = cmd.player;
+			
+			var placedEvent = {
 				id: cmd.id,
 				event: 'MovePlaced',
 				boardX: cmd.boardX,
@@ -126,7 +154,23 @@ module.exports = function tictactoeCommandHandler(events) {
 				gameName: cmd.gameName,
 				userName: cmd.userName,
 				timeStamp: cmd.timeStamp
-			}];
+			}; 
+
+			result = gameWon(cmd, gameState);
+			if (result !== undefined) {
+				var wonEvent = {
+					id: cmd.id,
+					event: 'GameWon',
+					winningPlayer: result,
+					gameName: cmd.gameName,
+					userName: cmd.userName,
+					timeStamp: cmd.timeStamp
+				};
+				
+				return [placedEvent, wonEvent];
+			}
+			
+			return [placedEvent];
 		}
 	};
 
