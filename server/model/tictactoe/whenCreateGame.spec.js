@@ -1,6 +1,44 @@
 'use strict';
 var tictactoeCommandHandler = require('./tictactoeCommandHandler');
 
+function createGameEvents(moves) {
+	var events = [];
+	var counter = 1;
+		
+	events.push({
+		id: '1',
+		event: 'GameCreated',
+		gameName: 'TestGame',
+		userName: 'Player1',
+		timeStamp: '2015.12.02T15:32:00'
+	});
+
+	events.push({
+		id: '2',
+		event: 'GameJoined',
+		gameName: 'TestGame',
+		userName: 'Player2',
+		otherUserName: 'Player1',
+		timeStamp: '2015.12.02T15:32:30'
+	});
+
+	moves.forEach(function(move) {
+		events.push({
+			id: counter + 2 + '',
+			event: 'MovePlaced',
+			boardX: move.boardX,
+			boardY: move.boardY,
+			player: move.player,
+			gameName: 'TestGame',
+			userName: (counter % 2 == 1 ? 'Player1' : 'Player2'),
+			timeStamp: '2015.12.02T15:00:' + (counter + 10)
+		});
+		counter++;
+	}, this);
+	
+	return events;
+};
+
 describe('create game command', function () {
 	var given, when, then;
 
@@ -101,12 +139,12 @@ describe('join game command', function () {
 
 	it('should not join game if already joined', function () {
 		given = [{
-				id: '678',
-				event: 'GameCreated',
-				gameName: 'FunGame',
-				userName: 'Eggert',
-				timeStamp: '2015.12.02T14:41:12'
-			},
+			id: '678',
+			event: 'GameCreated',
+			gameName: 'FunGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T14:41:12'
+		},
 			{
 				id: '6789',
 				event: 'GameJoined',
@@ -192,21 +230,61 @@ describe('place move command', function () {
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
 
-});
-
-
-/*
-describe('join game command', function(){
-	var given, when, then;
-	
-	it('should not join game if no game started', function() {
-		given = [];
+	it('should place move on fresh game', function () {
+		given = createGameEvents([]);
 		when = {
+			id: '977',
+			command: 'PlaceMove',
+			boardX: '0',
+			boardY: '0',
+			player: 'X',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T15:00:00'
 		};
-		then = [];
+		then = [{
+			id: '977',
+			event: 'MovePlaced',
+			boardX: '0',
+			boardY: '0',
+			player: 'X',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T15:00:00'
+		}];
+
+		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+	});
+
+	it('should not allow move on occupied cell', function () {
+		var moves = [
+			{
+				boardX : '0',
+				boardY : '0',
+				player : 'X'
+			}	
+		];
+		given = createGameEvents(moves);
+		when = {
+			id: '977',
+			command: 'PlaceMove',
+			boardX: '0',
+			boardY: '0',
+			player: 'X',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T15:00:00'
+		};
+		then = [{
+			id: '977',
+			event: 'IllegalMove',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T15:00:00'
+		}];
 
 		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
 });
-*/
