@@ -10,9 +10,10 @@ The valid commands and their corresponding events are
 
 Then there are notifications for illegal moves
 
-  * Notify(IllegalMove)
-  * Notify(IllegalPlayer)
-  * Notify(GameFull)
+  * GameNotFound
+  * GameFull
+  * IllegalMove
+  * IllegalPlayer
 
 ## Start game
 
