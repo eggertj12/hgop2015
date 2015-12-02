@@ -15,10 +15,13 @@ module.exports = function tictactoeCommandHandler(events) {
 	/**
 	 * Build the board status from event collection
 	 */
-	var buildBoard = function(events, gameState) {
+	var buildBoard = function(events, state) {
+		var counter = 0;
 		events.forEach(function(event) {
 			if (event.event === 'MovePlaced') {
-				gameState.board[event.boardY][event.boardX] = event.player;
+				state.board[event.boardY][event.boardX] = event.player;
+				counter ++;
+				state.numberOfMoves = counter;
 			}
 		}, this);	
 		return gameState;
@@ -31,6 +34,9 @@ module.exports = function tictactoeCommandHandler(events) {
 	var checkMove = function(cmd, state) {
 		if (state.board[cmd.boardY][cmd.boardX] !== '') {
 			return 'AlreadyFilled';
+		}
+		if (cmd.player === 'Y' && (state.numberOfMoves % 2) === 0) {
+			return 'InvalidPlayer';
 		}
 	};
 

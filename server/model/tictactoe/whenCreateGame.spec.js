@@ -288,28 +288,28 @@ describe('place move command', function () {
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
 
-// 	it('should not allow Y to move first', function () {
-// 		var moves = [];
-// 		given = createGameEvents(moves);
-// 		when = {
-// 			id: '977',
-// 			command: 'PlaceMove',
-// 			boardX: '0',
-// 			boardY: '0',
-// 			player: 'Y',
-// 			gameName: 'PlayingGame',
-// 			userName: 'Eggert',
-// 			timeStamp: '2015.12.02T15:00:00'
-// 		};
-// 		then = [{
-// 			id: '977',
-// 			event: 'IllegalMove',
-// 			gameName: 'PlayingGame',
-// 			userName: 'Eggert',
-// 			timeStamp: '2015.12.02T15:00:00'
-// 		}];
-// 
-// 		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
-// 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
-// 	});
+	it('should not allow Y to move first', function () {
+		var moves = [];
+		given = createGameEvents(moves);
+		when = {
+			id: '977',
+			command: 'PlaceMove',
+			boardX: '0',
+			boardY: '0',
+			player: 'Y',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T15:00:00'
+		};
+		then = [{
+			id: '977',
+			event: 'InvalidPlayer',
+			gameName: 'PlayingGame',
+			userName: 'Eggert',
+			timeStamp: '2015.12.02T15:00:00'
+		}];
+
+		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+	});
 });
