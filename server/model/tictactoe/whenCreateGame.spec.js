@@ -99,3 +99,48 @@ describe('join game command', function(){
 		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
 	});
 });
+
+describe('place move command', function(){
+	var given, when, then;
+	
+	it('should not place move if no game started', function() {
+		given = [];
+		when = {
+			id: '7483',
+			command:'PlaceMove',
+			boardX: '0',
+			boardY: '0',
+			player: 'X',
+			gameName: 'FirstGame',
+			userName : 'Eggert',
+			timeStamp: '2015.12.02T15:36:00'
+		};
+		then = [{
+			id: '7483',
+			event:'GameNotFound',
+			gameName: 'FirstGame',
+			userName : 'Eggert',
+			timeStamp: '2015.12.02T15:36:00'
+		}];
+
+		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+	});
+});
+
+
+/*
+describe('join game command', function(){
+	var given, when, then;
+	
+	it('should not join game if no game started', function() {
+		given = [];
+		when = {
+		};
+		then = [];
+
+		var actualEvents = tictactoeCommandHandler(given).executeCommand(when);
+		JSON.stringify(actualEvents).should.be.exactly(JSON.stringify(then));
+	});
+});
+*/
