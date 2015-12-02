@@ -50,7 +50,7 @@ module.exports = function tictactoeCommandHandler(events) {
 		// Check for winning column
 		for (var i = 0; i < 3; i++) {
 			var colFirst = state.board[0][i];
-			if (colFirst !== '' && (colFirst === state.board[1][i]) && (colFirst === state.board[1][i])) {
+			if (colFirst !== '' && (colFirst === state.board[1][i]) && (colFirst === state.board[2][i])) {
 				return colFirst;
 			}
 		}
@@ -66,6 +66,12 @@ module.exports = function tictactoeCommandHandler(events) {
 		// Check for winning diagonal 0,0 to 2,2
 		var diagFirst = state.board[0][0];
 		if (diagFirst !== '' && (diagFirst === state.board[1][1]) && (diagFirst === state.board[2][2])) {
+			return diagFirst;
+		}
+
+		// Check for winning diagonal 0,2 to 2,0
+		var diagFirst = state.board[0][2];
+		if (diagFirst !== '' && (diagFirst === state.board[1][1]) && (diagFirst === state.board[2][0])) {
 			return diagFirst;
 		}
 	};
