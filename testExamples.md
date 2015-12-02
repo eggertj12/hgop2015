@@ -19,11 +19,11 @@ Then there are notifications for illegal moves
 
 Given []
 When  [CreateGame()]
-Then  [GameCreated(), GameJoined(X)]
+Then  [GameCreated()]
 
 ## Join game
 
-Given [GameJoined(Y)]
+Given [GameCreated(), GameJoined()]
 When  [JoinGame()]
 Then  [Notify(GameFull)]
 
