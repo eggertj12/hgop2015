@@ -30,14 +30,14 @@ function createGameEvents(moves) {
 			boardY: move.boardY,
 			player: move.player,
 			gameName: 'TestGame',
-			userName: (counter % 2 == 1 ? 'Player1' : 'Player2'),
+			userName: (counter % 2 === 1 ? 'Player1' : 'Player2'),
 			timeStamp: '2015.12.02T15:00:' + (counter + 10)
 		});
 		counter++;
-	}, this);
+	});
 	
 	return events;
-};
+}
 
 describe('create game command', function () {
 	var given, when, then;

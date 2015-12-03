@@ -63,7 +63,7 @@ function tictactoeState() {
 			}
 	
 			// Check for winning row
-			for (var i = 0; i < 3; i++) {
+			for (i = 0; i < 3; i++) {
 				var rowFirst = state.board[i][0];
 				if (rowFirst !== '' && (rowFirst === state.board[i][1]) && (rowFirst === state.board[i][2])) {
 					return rowFirst;
@@ -77,7 +77,7 @@ function tictactoeState() {
 			}
 	
 			// Check for winning diagonal 0,2 to 2,0
-			var diagFirst = state.board[0][2];
+			diagFirst = state.board[0][2];
 			if (diagFirst !== '' && (diagFirst === state.board[1][1]) && (diagFirst === state.board[2][0])) {
 				return diagFirst;
 			}
