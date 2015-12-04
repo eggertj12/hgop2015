@@ -8,6 +8,7 @@ describe('join game command', function () {
 	it('should join game', function () {
 		given = [{
 			id: '1234',
+			gameId: 'jdike',
 			event: 'GameCreated',
 			userName: 'Gulli',
 			gameName: 'FirstGame',
@@ -15,6 +16,7 @@ describe('join game command', function () {
 		}];
 		when = {
 			id: '1238',
+			gameId: 'jdike',
 			command: 'JoinGame',
 			gameName: 'FirstGame',
 			userName: 'Eggert',
@@ -22,6 +24,7 @@ describe('join game command', function () {
 		};
 		then = [{
 			id: '1238',
+			gameId: 'jdike',
 			event: 'GameJoined',
 			gameName: 'FirstGame',
 			userName: 'Eggert',
@@ -37,6 +40,7 @@ describe('join game command', function () {
 		given = [];
 		when = {
 			id: '5432',
+			gameId: 'jkhee',
 			command: 'JoinGame',
 			gameName: 'FirstGame',
 			userName: 'Eggert',
@@ -44,6 +48,7 @@ describe('join game command', function () {
 		};
 		then = [{
 			id: '5432',
+			gameId: 'jkhee',
 			event: 'GameNotFound',
 			gameName: 'FirstGame',
 			userName: 'Eggert',
@@ -57,6 +62,7 @@ describe('join game command', function () {
 	it('should not join game if already joined', function () {
 		given = [{
 			id: '678',
+			gameId: 'kciek',
 			event: 'GameCreated',
 			gameName: 'FunGame',
 			userName: 'Eggert',
@@ -64,6 +70,7 @@ describe('join game command', function () {
 		},
 			{
 				id: '6789',
+				gameId: 'kciek',
 				event: 'GameJoined',
 				gameName: 'FunGame',
 				userName: 'Eggert',
@@ -72,6 +79,7 @@ describe('join game command', function () {
 			}];
 		when = {
 			id: '97838',
+			gameId: 'kciek',
 			command: 'JoinGame',
 			gameName: 'FunGame',
 			userName: 'Patty',
@@ -79,6 +87,7 @@ describe('join game command', function () {
 		};
 		then = [{
 			id: '97838',
+			gameId: 'kciek',
 			event: 'GameFull',
 			gameName: 'FunGame',
 			userName: 'Patty',

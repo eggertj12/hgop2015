@@ -10,6 +10,7 @@ module.exports = function tictactoeCommandHandler(events) {
 		'CreateGame': function (cmd) {
 			return [{
 				id: cmd.id,
+				gameId: cmd.gameId,
 				event: 'GameCreated',
 				gameName: cmd.gameName,
 				userName: cmd.userName,
@@ -21,6 +22,7 @@ module.exports = function tictactoeCommandHandler(events) {
 			if (gameCreatedEvent === undefined) {
 				return [{
 					id: cmd.id,
+					gameId: cmd.gameId,
 					event: 'GameNotFound',
 					gameName: cmd.gameName,
 					userName: cmd.userName,
@@ -30,6 +32,7 @@ module.exports = function tictactoeCommandHandler(events) {
 			if (gameJoinedEvent !== undefined) {
 				return [{
 					id: cmd.id,
+					gameId: cmd.gameId,
 					event: 'GameFull',
 					gameName: cmd.gameName,
 					userName: cmd.userName,
@@ -38,6 +41,7 @@ module.exports = function tictactoeCommandHandler(events) {
 			}
 			return [{
 				id: cmd.id,
+				gameId: cmd.gameId,
 				event: 'GameJoined',
 				gameName: cmd.gameName,
 				userName: cmd.userName,
@@ -52,6 +56,7 @@ module.exports = function tictactoeCommandHandler(events) {
 			if (gameCreatedEvent === undefined) {
 				return [{
 					id: cmd.id,
+					gameId: cmd.gameId,
 					event: 'GameNotFound',
 					gameName: cmd.gameName,
 					userName: cmd.userName,
@@ -62,6 +67,7 @@ module.exports = function tictactoeCommandHandler(events) {
 			if (gameJoinedEvent === undefined) {
 				return [{
 					id: cmd.id,
+					gameId: cmd.gameId,
 					event: 'GameNotReady',
 					gameName: cmd.gameName,
 					userName: cmd.userName,
@@ -77,6 +83,7 @@ module.exports = function tictactoeCommandHandler(events) {
 			if (result !== undefined) {
 				return [{
 					id: cmd.id,
+					gameId: cmd.gameId,
 					event: result,
 					gameName: cmd.gameName,
 					userName: cmd.userName,
@@ -88,6 +95,7 @@ module.exports = function tictactoeCommandHandler(events) {
 			state.placeMove(cmd.boardX, cmd.boardY, cmd.player);
 			var placedEvent = {
 				id: cmd.id,
+				gameId: cmd.gameId,
 				event: 'MovePlaced',
 				boardX: cmd.boardX,
 				boardY: cmd.boardY,
@@ -102,6 +110,7 @@ module.exports = function tictactoeCommandHandler(events) {
 			if (result !== undefined) {
 				var wonEvent = {
 					id: cmd.id,
+					gameId: cmd.gameId,
 					event: 'GameWon',
 					winningPlayer: result,
 					gameName: cmd.gameName,
@@ -116,6 +125,7 @@ module.exports = function tictactoeCommandHandler(events) {
 			if (state.gameDrawn()) {
 				var drawnEvent = {
 					id: cmd.id,
+					gameId: cmd.gameId,
 					event: 'GameDrawn',
 					gameName: cmd.gameName,
 					userName: cmd.userName,

@@ -20,6 +20,7 @@ module.exports = function testMoveFactory () {
 		
 			events.push({
 				id: '1',
+				gameId: 'idsaregood',
 				event: 'GameCreated',
 				gameName: 'TestGame',
 				userName: 'Player1',
@@ -28,6 +29,7 @@ module.exports = function testMoveFactory () {
 		
 			events.push({
 				id: '2',
+				gameId: 'idsaregood',
 				event: 'GameJoined',
 				gameName: 'TestGame',
 				userName: 'Player2',
@@ -38,6 +40,7 @@ module.exports = function testMoveFactory () {
 			moves.forEach(function(move) {
 				events.push({
 					id: counter + 2 + '',
+					gameId: 'idsaregood',
 					event: 'MovePlaced',
 					boardX: move.boardX,
 					boardY: move.boardY,

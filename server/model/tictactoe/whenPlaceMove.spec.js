@@ -9,6 +9,7 @@ describe('place move command', function () {
 		given = [];
 		when = {
 			id: '7483',
+			gameId: 'jeikcoe',
 			command: 'PlaceMove',
 			boardX: '0',
 			boardY: '0',
@@ -19,6 +20,7 @@ describe('place move command', function () {
 		};
 		then = [{
 			id: '7483',
+			gameId: 'jeikcoe',
 			event: 'GameNotFound',
 			gameName: 'FirstGame',
 			userName: 'Eggert',
@@ -32,6 +34,7 @@ describe('place move command', function () {
 	it('should not place move if game not full', function () {
 		given = [{
 			id: '5374',
+			gameId: 'jdkie',
 			event: 'GameCreated',
 			userName: 'Freyja',
 			gameName: 'SomeGame',
@@ -39,6 +42,7 @@ describe('place move command', function () {
 		}];
 		when = {
 			id: '7483',
+			gameId: 'jdkie',
 			command: 'PlaceMove',
 			boardX: '0',
 			boardY: '0',
@@ -49,6 +53,7 @@ describe('place move command', function () {
 		};
 		then = [{
 			id: '7483',
+			gameId: 'jdkie',
 			event: 'GameNotReady',
 			gameName: 'SomeGame',
 			userName: 'Eggert',
@@ -63,6 +68,7 @@ describe('place move command', function () {
 		given = testMoveFactory.createGameEvents([]);
 		when = {
 			id: '977',
+			gameId: 'idsaregood',
 			command: 'PlaceMove',
 			boardX: '0',
 			boardY: '0',
@@ -73,6 +79,7 @@ describe('place move command', function () {
 		};
 		then = [{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'MovePlaced',
 			boardX: '0',
 			boardY: '0',
@@ -93,6 +100,7 @@ describe('place move command', function () {
 		given = testMoveFactory.createGameEvents(moves);
 		when = {
 			id: '977',
+			gameId: 'idsaregood',
 			command: 'PlaceMove',
 			boardX: '0',
 			boardY: '0',
@@ -103,6 +111,7 @@ describe('place move command', function () {
 		};
 		then = [{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'AlreadyFilled',
 			gameName: 'PlayingGame',
 			userName: 'Eggert',
@@ -118,6 +127,7 @@ describe('place move command', function () {
 		given = testMoveFactory.createGameEvents(moves);
 		when = {
 			id: '977',
+			gameId: 'idsaregood',
 			command: 'PlaceMove',
 			boardX: '0',
 			boardY: '0',
@@ -128,6 +138,7 @@ describe('place move command', function () {
 		};
 		then = [{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'InvalidPlayer',
 			gameName: 'PlayingGame',
 			userName: 'Eggert',
@@ -147,6 +158,7 @@ describe('place move command', function () {
 		given = testMoveFactory.createGameEvents(moves);
 		when = {
 			id: '977',
+			gameId: 'idsaregood',
 			command: 'PlaceMove',
 			boardX: '0',
 			boardY: '2',
@@ -157,6 +169,7 @@ describe('place move command', function () {
 		};
 		then = [{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'InvalidPlayer',
 			gameName: 'PlayingGame',
 			userName: 'Eggert',
@@ -177,6 +190,7 @@ describe('place move command', function () {
 		given = testMoveFactory.createGameEvents(moves);
 		when = {
 			id: '977',
+			gameId: 'idsaregood',
 			command: 'PlaceMove',
 			boardX: '0',
 			boardY: '2',
@@ -187,6 +201,7 @@ describe('place move command', function () {
 		};
 		then = [{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'MovePlaced',
 			boardX: '0',
 			boardY: '2',
@@ -197,6 +212,7 @@ describe('place move command', function () {
 		},
 		{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'GameWon',
 			winningPlayer: 'X',
 			gameName: 'PlayingGame',
@@ -219,6 +235,7 @@ describe('place move command', function () {
 		given = testMoveFactory.createGameEvents(moves);
 		when = {
 			id: '977',
+			gameId: 'idsaregood',
 			command: 'PlaceMove',
 			boardX: '2',
 			boardY: '1',
@@ -229,6 +246,7 @@ describe('place move command', function () {
 		};
 		then = [{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'MovePlaced',
 			boardX: '2',
 			boardY: '1',
@@ -239,6 +257,7 @@ describe('place move command', function () {
 		},
 		{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'GameWon',
 			winningPlayer: 'O',
 			gameName: 'PlayingGame',
@@ -260,6 +279,7 @@ describe('place move command', function () {
 		given = testMoveFactory.createGameEvents(moves);
 		when = {
 			id: '977',
+			gameId: 'idsaregood',
 			command: 'PlaceMove',
 			boardX: '1',
 			boardY: '1',
@@ -270,6 +290,7 @@ describe('place move command', function () {
 		};
 		then = [{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'MovePlaced',
 			boardX: '1',
 			boardY: '1',
@@ -280,6 +301,7 @@ describe('place move command', function () {
 		},
 		{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'GameWon',
 			winningPlayer: 'X',
 			gameName: 'PlayingGame',
@@ -302,6 +324,7 @@ describe('place move command', function () {
 		given = testMoveFactory.createGameEvents(moves);
 		when = {
 			id: '977',
+			gameId: 'idsaregood',
 			command: 'PlaceMove',
 			boardX: '1',
 			boardY: '1',
@@ -312,6 +335,7 @@ describe('place move command', function () {
 		};
 		then = [{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'MovePlaced',
 			boardX: '1',
 			boardY: '1',
@@ -322,6 +346,7 @@ describe('place move command', function () {
 		},
 		{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'GameWon',
 			winningPlayer: 'O',
 			gameName: 'PlayingGame',
@@ -347,6 +372,7 @@ describe('place move command', function () {
 		given = testMoveFactory.createGameEvents(moves);
 		when = {
 			id: '977',
+			gameId: 'idsaregood',
 			command: 'PlaceMove',
 			boardX: '2',
 			boardY: '2',
@@ -357,6 +383,7 @@ describe('place move command', function () {
 		};
 		then = [{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'MovePlaced',
 			boardX: '2',
 			boardY: '2',
@@ -367,6 +394,7 @@ describe('place move command', function () {
 		},
 		{
 			id: '977',
+			gameId: 'idsaregood',
 			event: 'GameDrawn',
 			gameName: 'PlayingGame',
 			userName: 'Eggert',
