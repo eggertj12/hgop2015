@@ -10,11 +10,11 @@ describe('place move command', function () {
 		when = {
 			id: '7483',
 			gameId: 'jeikcoe',
-			command: 'PlaceMove',
+			comm: 'PlaceMove',
 			boardX: '0',
 			boardY: '0',
 			player: 'X',
-			gameName: 'FirstGame',
+			name: 'FirstGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T15:36:00'
 		};
@@ -22,7 +22,7 @@ describe('place move command', function () {
 			id: '7483',
 			gameId: 'jeikcoe',
 			event: 'GameNotFound',
-			gameName: 'FirstGame',
+			name: 'FirstGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T15:36:00'
 		}];
@@ -37,17 +37,17 @@ describe('place move command', function () {
 			gameId: 'jdkie',
 			event: 'GameCreated',
 			userName: 'Freyja',
-			gameName: 'SomeGame',
+			name: 'SomeGame',
 			timeStamp: '2015.12.02T09:29:44'
 		}];
 		when = {
 			id: '7483',
 			gameId: 'jdkie',
-			command: 'PlaceMove',
+			comm: 'PlaceMove',
 			boardX: '0',
 			boardY: '0',
 			player: 'X',
-			gameName: 'SomeGame',
+			name: 'SomeGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T09:36:00'
 		};
@@ -55,7 +55,7 @@ describe('place move command', function () {
 			id: '7483',
 			gameId: 'jdkie',
 			event: 'GameNotReady',
-			gameName: 'SomeGame',
+			name: 'SomeGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T09:36:00'
 		}];
@@ -69,11 +69,11 @@ describe('place move command', function () {
 		when = {
 			id: '977',
 			gameId: 'idsaregood',
-			command: 'PlaceMove',
+			comm: 'PlaceMove',
 			boardX: '0',
 			boardY: '0',
 			player: 'X',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T15:00:00'
 		};
@@ -84,7 +84,7 @@ describe('place move command', function () {
 			boardX: '0',
 			boardY: '0',
 			player: 'X',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T15:00:00'
 		}];
@@ -101,11 +101,11 @@ describe('place move command', function () {
 		when = {
 			id: '977',
 			gameId: 'idsaregood',
-			command: 'PlaceMove',
+			comm: 'PlaceMove',
 			boardX: '0',
 			boardY: '0',
 			player: 'X',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T15:00:00'
 		};
@@ -113,7 +113,7 @@ describe('place move command', function () {
 			id: '977',
 			gameId: 'idsaregood',
 			event: 'AlreadyFilled',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T15:00:00'
 		}];
@@ -128,11 +128,11 @@ describe('place move command', function () {
 		when = {
 			id: '977',
 			gameId: 'idsaregood',
-			command: 'PlaceMove',
+			comm: 'PlaceMove',
 			boardX: '0',
 			boardY: '0',
 			player: 'O',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T15:00:00'
 		};
@@ -140,7 +140,7 @@ describe('place move command', function () {
 			id: '977',
 			gameId: 'idsaregood',
 			event: 'InvalidPlayer',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T15:00:00'
 		}];
@@ -159,11 +159,11 @@ describe('place move command', function () {
 		when = {
 			id: '977',
 			gameId: 'idsaregood',
-			command: 'PlaceMove',
+			comm: 'PlaceMove',
 			boardX: '0',
 			boardY: '2',
 			player: 'X',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T16:35:00'
 		};
@@ -171,7 +171,7 @@ describe('place move command', function () {
 			id: '977',
 			gameId: 'idsaregood',
 			event: 'InvalidPlayer',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T16:35:00'
 		}];
@@ -191,11 +191,11 @@ describe('place move command', function () {
 		when = {
 			id: '977',
 			gameId: 'idsaregood',
-			command: 'PlaceMove',
+			comm: 'PlaceMove',
 			boardX: '0',
 			boardY: '2',
 			player: 'X',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:01:13'
 		};
@@ -206,7 +206,7 @@ describe('place move command', function () {
 			boardX: '0',
 			boardY: '2',
 			player: 'X',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:01:13'
 		},
@@ -215,7 +215,7 @@ describe('place move command', function () {
 			gameId: 'idsaregood',
 			event: 'GameWon',
 			winningPlayer: 'X',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:01:13'
 		}];
@@ -236,11 +236,11 @@ describe('place move command', function () {
 		when = {
 			id: '977',
 			gameId: 'idsaregood',
-			command: 'PlaceMove',
+			comm: 'PlaceMove',
 			boardX: '2',
 			boardY: '1',
 			player: 'O',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:18:53'
 		};
@@ -251,7 +251,7 @@ describe('place move command', function () {
 			boardX: '2',
 			boardY: '1',
 			player: 'O',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:18:53'
 		},
@@ -260,7 +260,7 @@ describe('place move command', function () {
 			gameId: 'idsaregood',
 			event: 'GameWon',
 			winningPlayer: 'O',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:18:53'
 		}];
@@ -280,11 +280,11 @@ describe('place move command', function () {
 		when = {
 			id: '977',
 			gameId: 'idsaregood',
-			command: 'PlaceMove',
+			comm: 'PlaceMove',
 			boardX: '1',
 			boardY: '1',
 			player: 'X',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:24:57'
 		};
@@ -295,7 +295,7 @@ describe('place move command', function () {
 			boardX: '1',
 			boardY: '1',
 			player: 'X',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:24:57'
 		},
@@ -304,7 +304,7 @@ describe('place move command', function () {
 			gameId: 'idsaregood',
 			event: 'GameWon',
 			winningPlayer: 'X',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:24:57'
 		}];
@@ -325,11 +325,11 @@ describe('place move command', function () {
 		when = {
 			id: '977',
 			gameId: 'idsaregood',
-			command: 'PlaceMove',
+			comm: 'PlaceMove',
 			boardX: '1',
 			boardY: '1',
 			player: 'O',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:29:07'
 		};
@@ -340,7 +340,7 @@ describe('place move command', function () {
 			boardX: '1',
 			boardY: '1',
 			player: 'O',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:29:07'
 		},
@@ -349,7 +349,7 @@ describe('place move command', function () {
 			gameId: 'idsaregood',
 			event: 'GameWon',
 			winningPlayer: 'O',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:29:07'
 		}];
@@ -373,11 +373,11 @@ describe('place move command', function () {
 		when = {
 			id: '977',
 			gameId: 'idsaregood',
-			command: 'PlaceMove',
+			comm: 'PlaceMove',
 			boardX: '2',
 			boardY: '2',
 			player: 'X',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:41:05'
 		};
@@ -388,7 +388,7 @@ describe('place move command', function () {
 			boardX: '2',
 			boardY: '2',
 			player: 'X',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:41:05'
 		},
@@ -396,7 +396,7 @@ describe('place move command', function () {
 			id: '977',
 			gameId: 'idsaregood',
 			event: 'GameDrawn',
-			gameName: 'PlayingGame',
+			name: 'PlayingGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T17:41:05'
 		}];

@@ -35,7 +35,7 @@ module.exports = function tictactoeState() {
 		},
 		
 		/**
-		 * Check if given commmand is a valid move
+		 * Check if given command is a valid move
 		 * returns event name on invalid move, undefined otherwise
 		 */
 		'checkMove': function(x, y, player) {

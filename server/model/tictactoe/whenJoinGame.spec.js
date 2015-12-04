@@ -11,14 +11,14 @@ describe('join game command', function () {
 			gameId: 'jdike',
 			event: 'GameCreated',
 			userName: 'Gulli',
-			gameName: 'FirstGame',
+			name: 'FirstGame',
 			timeStamp: '2015.12.02T11:29:44'
 		}];
 		when = {
 			id: '1238',
 			gameId: 'jdike',
-			command: 'JoinGame',
-			gameName: 'FirstGame',
+			comm: 'JoinGame',
+			name: 'FirstGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T11:30:14'
 		};
@@ -26,7 +26,7 @@ describe('join game command', function () {
 			id: '1238',
 			gameId: 'jdike',
 			event: 'GameJoined',
-			gameName: 'FirstGame',
+			name: 'FirstGame',
 			userName: 'Eggert',
 			otherUserName: 'Gulli',
 			timeStamp: '2015.12.02T11:30:14'
@@ -41,8 +41,8 @@ describe('join game command', function () {
 		when = {
 			id: '5432',
 			gameId: 'jkhee',
-			command: 'JoinGame',
-			gameName: 'FirstGame',
+			comm: 'JoinGame',
+			name: 'FirstGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T15:30:54'
 		};
@@ -50,7 +50,7 @@ describe('join game command', function () {
 			id: '5432',
 			gameId: 'jkhee',
 			event: 'GameNotFound',
-			gameName: 'FirstGame',
+			name: 'FirstGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T15:30:54'
 		}];
@@ -64,7 +64,7 @@ describe('join game command', function () {
 			id: '678',
 			gameId: 'kciek',
 			event: 'GameCreated',
-			gameName: 'FunGame',
+			name: 'FunGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T14:41:12'
 		},
@@ -72,7 +72,7 @@ describe('join game command', function () {
 				id: '6789',
 				gameId: 'kciek',
 				event: 'GameJoined',
-				gameName: 'FunGame',
+				name: 'FunGame',
 				userName: 'Eggert',
 				otherUserName: 'Gulli',
 				timeStamp: '2015.12.02T14:55:14'
@@ -80,8 +80,8 @@ describe('join game command', function () {
 		when = {
 			id: '97838',
 			gameId: 'kciek',
-			command: 'JoinGame',
-			gameName: 'FunGame',
+			comm: 'JoinGame',
+			name: 'FunGame',
 			userName: 'Patty',
 			timeStamp: '2015.12.02T15:06:54'
 		};
@@ -89,7 +89,7 @@ describe('join game command', function () {
 			id: '97838',
 			gameId: 'kciek',
 			event: 'GameFull',
-			gameName: 'FunGame',
+			name: 'FunGame',
 			userName: 'Patty',
 			timeStamp: '2015.12.02T15:06:54'
 		}];

@@ -10,8 +10,8 @@ describe('create game command', function () {
 		when = {
 			id: '1234',
 			gameId: 'abcd',
-			command: 'CreateGame',
-			gameName: 'FirstGame',
+			comm: 'CreateGame',
+			name: 'FirstGame',
 			userName: 'Gulli',
 			timeStamp: '2015.12.02T11:29:44'
 		};
@@ -19,7 +19,7 @@ describe('create game command', function () {
 			id: '1234',
 			gameId: 'abcd',
 			event: 'GameCreated',
-			gameName: 'FirstGame',
+			name: 'FirstGame',
 			userName: 'Gulli',
 			timeStamp: '2015.12.02T11:29:44'
 		}];
@@ -33,8 +33,8 @@ describe('create game command', function () {
 		when = {
 			id: '9876',
 			gameId: 'abcd',
-			command: 'CreateGame',
-			gameName: 'MyGame',
+			comm: 'CreateGame',
+			name: 'MyGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T14:41:12'
 		};
@@ -42,7 +42,7 @@ describe('create game command', function () {
 			id: '9876',
 			gameId: 'abcd',
 			event: 'GameCreated',
-			gameName: 'MyGame',
+			name: 'MyGame',
 			userName: 'Eggert',
 			timeStamp: '2015.12.02T14:41:12'
 		}];
