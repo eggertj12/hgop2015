@@ -1,0 +1,42 @@
+
+[0m[0m
+Express server listening on 9000, in test mode
+[0m  GET /api/gameHistory[0m
+[90mPOST /api/createGame [32m200 [90m30ms - 127b[0m
+[90mGET /api/gameHistory/999 [32m200 [90m3ms - 127b[0m
+[2K[0G  [32m  ✓[0m[90m should respond with JSON array with created events for game [0m[31m(248ms)[0m
+
+[0m  In memory store[0m
+[2K[0G  [32m  ✓[0m[90m Should return empty array for unknown id [0m
+[2K[0G  [32m  ✓[0m[90m Should return events previously stored [0m
+[2K[0G  [32m  ✓[0m[90m should append stored events to events previously stored [0m
+
+[0m  tictactoe game context[0m
+[2K[0G  [32m  ✓[0m[90m should route command to instantiated tictactoe game with event stream from store and return and store generated events. Test using fakes/stubs. [0m
+[2K[0G  [32m  ✓[0m[90m should route command to instantiated tictactoe game with event stream from store and return generated events, using mock style tests. [0m[31m(100ms)[0m
+
+[0m  create game command[0m
+[2K[0G  [32m  ✓[0m[90m should create game [0m
+[2K[0G  [32m  ✓[0m[90m should create another game for another user [0m
+
+[0m  join game command[0m
+[2K[0G  [32m  ✓[0m[90m should join game [0m
+[2K[0G  [32m  ✓[0m[90m should not join game if no game started [0m
+[2K[0G  [32m  ✓[0m[90m should not join game if already joined [0m
+
+[0m  place move command[0m
+[2K[0G  [32m  ✓[0m[90m should not place move if no game started [0m
+[2K[0G  [32m  ✓[0m[90m should not place move if game not full [0m
+[2K[0G  [32m  ✓[0m[90m should place move on fresh game [0m
+[2K[0G  [32m  ✓[0m[90m should not allow move on occupied cell [0m
+[2K[0G  [32m  ✓[0m[90m should not allow O to move first [0m
+[2K[0G  [32m  ✓[0m[90m should not allow X to move after 3 moves [0m
+[2K[0G  [32m  ✓[0m[90m should allow X to win on a column [0m
+[2K[0G  [32m  ✓[0m[90m should allow O to win on a row [0m
+[2K[0G  [32m  ✓[0m[90m should allow X to win on diagonal from 0,0 to 2,2 [0m
+[2K[0G  [32m  ✓[0m[90m should allow O to win on diagonal from 0,2 to 2,0 [0m
+[2K[0G  [32m  ✓[0m[90m should allow game to be drawn [0m
+
+
+[92m [0m[32m 22 passing[0m[90m (407ms)[0m
+
