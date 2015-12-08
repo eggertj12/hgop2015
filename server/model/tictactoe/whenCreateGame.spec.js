@@ -21,6 +21,7 @@ describe('create game command', function () {
 			event: 'GameCreated',
 			name: 'FirstGame',
 			userName: 'Gulli',
+			player: 'X',
 			timeStamp: '2015.12.02T11:29:44'
 		}];
 
@@ -44,6 +45,7 @@ describe('create game command', function () {
 			event: 'GameCreated',
 			name: 'MyGame',
 			userName: 'Eggert',
+			player: 'X',
 			timeStamp: '2015.12.02T14:41:12'
 		}];
 

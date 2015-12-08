@@ -14,6 +14,7 @@ module.exports = function tictactoeCommandHandler(events) {
 				event: 'GameCreated',
 				name: cmd.name,
 				userName: cmd.userName,
+				player: 'X',
 				timeStamp: cmd.timeStamp
 			}];
 		},
@@ -45,6 +46,7 @@ module.exports = function tictactoeCommandHandler(events) {
 				event: 'GameJoined',
 				name: cmd.name,
 				userName: cmd.userName,
+				player: 'O',
 				otherUserName: gameCreatedEvent.userName,
 				timeStamp: cmd.timeStamp
 			}];

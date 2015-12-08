@@ -28,6 +28,7 @@ describe('join game command', function () {
 			event: 'GameJoined',
 			name: 'FirstGame',
 			userName: 'Eggert',
+			player: 'O',
 			otherUserName: 'Gulli',
 			timeStamp: '2015.12.02T11:30:14'
 		}];

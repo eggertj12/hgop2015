@@ -36,6 +36,7 @@ describe('GET /api/gameHistory', function () {
                 "gameId": "999",
                 "event": "GameCreated",
                 "userName": "Gulli",
+        				"player": 'X',
                 "name": "TheFirstGame",
                 "timeStamp": "2014-12-02T11:29:29"
               }]);
