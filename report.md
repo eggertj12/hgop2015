@@ -45,7 +45,9 @@ bower hefur sambærilegt hlutverk og npm í ferlinu. Það er hinsvegar sá gall
   * Þróunarvél. Vagrant sýndarvél með CentOS stýrikerfi sem unnið er í forritun á, getur keyrt próf, build og deploy skriftur. (Aðgangur er að þessari sýndarvél frá hýsli og þannig hægt að vinna þróun á „native“ ritli.
   
   * Byggingar vél. Sama Vagrant sýndarvélin sem keyrir Jenkins CI og sér um að byggja verkefnið og senda það á prófunarvélina. Þó þetta sé sama vélin snertast hlutverkin nánast ekkert. Eina snertingin frá build hlutverkinu yfir í þróunarhlutverkið er að Jenkins sækir deployment skriftu yfir í þróunarmöppuna. Þetta mætti leysa á annan hátt en hefur ekki verið talið svara fyrirhöfn að sinni.
+  Byggingarvélin hefur IP-tölu 192.168.50.11 og hún opnar fyrir port 8080 þar sem Jenkins er aðgengilegur. S.s. hægt að komast í Jenkins bæði á 192.168.50.11:8080 og localhost:8080
   
   * Prófunarvél. Önnur Vagrant sýndarvél, byggð á ubuntu, sem keyrir docker ílát með verkefninu.
+  Möppun porta og IP-talna er eftirfarandi eins og er núna. Docker container keyrir Express verkefnið á porti 8080 og það er mappað á port 9000 í test vélinni. Test vélin er sett upp á IP tölunni 192.168.50.12. Test url er þar með http://192.168.50.12 Vagrant mappar svo porti 9000 yfir á 9090 á host vélinni sem hún keyrir á.
   
 Ferli útgáfu er þannig að kóða er ýtt upp á GitHub. Jenkins CI á build vél fylgist með github safninu. Þegar breyting hefur orðið þá sækir hann nýja útgáfu af kóðanum, byggir hann, keyrir einingapróf og byggir svo að lokum nýja docker mynd með verkefninu. Ef bygging hefur tekist þá keyrist sjálfkrafa útgáfa á nýbyggðu docker myndinni yfir á prófunarvélina.
