@@ -1,9 +1,34 @@
 module.exports = function () {
 	const constants = require('./constants.fluidapi')();
 
-	var should = require('should');
-	var request = require('supertest');
-	var acceptanceUrl = process.env.ACCEPTANCE_URL;
+	const should = require('should');
+	const request = require('supertest');
+	const q = require('q');
+	
+	const acceptanceUrl = process.env.ACCEPTANCE_URL;
+	
+	function executeCommand(command) {
+		const deferred = q.defer();
+		const req = request(acceptanceUrl);
+		req.post('/api/createGame')
+			.type('json')
+			.send(command)
+			.end((err, res) => {
+				if (err) {
+					deferred.reject(err);
+				}
+				deferred.resolve(res);
+			});
+		return deferred.promise;
+	}
+	
+	function executeCommands(commands) {
+		return commands.reduce(function(promise, command) {
+			return promise.then(function(result) {
+				return executeCommand(command, result);
+			});        
+		}, q());		
+	}
 
 	return function given(user) {
 		const condition = {};
@@ -18,38 +43,31 @@ module.exports = function () {
 				return givenAPI;
 			},
 			'isOk': (done) => {
-				// Execute command
-				var req = request(acceptanceUrl);
-				req
-					.post('/api/createGame')
-					.type('json')
-					.send(user.commands[0])
-					.end((err, res) => {
-						if (err) {
-							return done(err);
-						}
+				executeCommands(user.commands)
+				.then(() => {
+					console.log("Done");
 
-						// Load the game history and verify that it fulfills the conditions
-						request(acceptanceUrl)
-							.get('/api/gameHistory/' + constants.testGameId)
-							.expect(200)
-							.expect('Content-Type', /json/)
-							.end(function (err, res) {
-								if (err) return done(err);
-								res.body.should.be.instanceof(Array);
-								should(res.body).eql(
-									[{
-										"id": constants.testCmdId,
-										"gameId": constants.testGameId,
-										"event": condition.event,
-										"userName": user.userName,
-										"name": condition.gameName,
-										"timeStamp": constants.testTimeStamp
-									}]);
-								done();
-							});
-
-					});
+					// Load the game history and verify that it fulfills the conditions
+					request(acceptanceUrl)
+						.get('/api/gameHistory/' + constants.testGameId)
+						.expect(200)
+						.expect('Content-Type', /json/)
+						.end(function (err, res) {
+							if (err) return done(err);
+							res.body.should.be.instanceof(Array);
+							should(res.body).eql(
+								[{
+									"id": constants.testCmdId,
+									"gameId": constants.testGameId,
+									"event": condition.event,
+									"userName": user.userName,
+									"name": condition.gameName,
+									"timeStamp": constants.testTimeStamp
+								}]);
+							done();
+						});
+				});
+				
 			}
 		};
 
