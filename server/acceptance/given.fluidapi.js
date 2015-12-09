@@ -10,7 +10,9 @@ module.exports = function () {
 	function executeCommand(command) {
 		const deferred = q.defer();
 		const req = request(acceptanceUrl);
-		req.post('/api/createGame')
+		console.log('Executing: ' + command.comm + ' on game: ' + command.gameId);
+		console.log('Command: ', command);
+		req.post('/api/' + command.comm)
 			.type('json')
 			.send(command)
 			.end((err, res) => {
@@ -31,39 +33,57 @@ module.exports = function () {
 	}
 
 	return function given(user) {
-		const condition = {};
+		const condition = {
+			'event': '',
+			'gameId': user.getGameId(),
+			'gameName': user.getGameName()
+		};
+		var commands = user.getCommands();
+		var currentUser = user;
 
 		var givenAPI = {
-			'expect': (event) => {
+			'and': function (user) {
+				commands = user.getCommands();
+				currentUser = user;
+				return givenAPI;
+			},
+			'expect': function (event) {
 				condition.event = event;
 				return givenAPI;
 			},
-			'withName': (gameName) => {
+			'withName': function (gameName)  {
 				condition.gameName = gameName;
 				return givenAPI;
 			},
 			'isOk': (done) => {
-				executeCommands(user.commands)
+				const expectedEvent = {
+					"id": constants.testCmdId,
+					"gameId": currentUser.getGameId(),
+					"event": condition.event,
+					"userName": user.getUserName(),
+					"name": condition.gameName,
+					"timeStamp": constants.testTimeStamp
+				};
+				
+				if (condition.event === 'GameJoined') {
+					expectedEvent.userName = currentUser.getJoinerName();
+					expectedEvent.otherUserName = currentUser.getOwnerName();
+				} 
+				
+				console.log('exp: ', expectedEvent);
+				
+				executeCommands(commands)
 				.then(() => {
-					console.log("Done");
 
 					// Load the game history and verify that it fulfills the conditions
 					request(acceptanceUrl)
-						.get('/api/gameHistory/' + constants.testGameId)
+						.get('/api/gameHistory/' + user.getGameId())
 						.expect(200)
 						.expect('Content-Type', /json/)
 						.end(function (err, res) {
 							if (err) return done(err);
 							res.body.should.be.instanceof(Array);
-							should(res.body).eql(
-								[{
-									"id": constants.testCmdId,
-									"gameId": constants.testGameId,
-									"event": condition.event,
-									"userName": user.userName,
-									"name": condition.gameName,
-									"timeStamp": constants.testTimeStamp
-								}]);
+							should(res.body.pop()).eql(expectedEvent);
 							done();
 						});
 				});

@@ -6,6 +6,7 @@ const acceptanceUrl = process.env.ACCEPTANCE_URL;
 
 const user = require('./user.fluidapi.js')();
 const given = require('./given.fluidapi.js')();
+const constants = require('./constants.fluidapi')();
 
 describe('TEST ENV GET /api/gameHistory', function () {
 
@@ -54,8 +55,18 @@ describe('TEST ENV GET /api/gameHistory', function () {
 
 
   it('Should execute fluid API test', function (done) {
-    given(user("YourUser").createsGame("TheFirstGame"))
+    user().clearState();
+    given(user("YourUser").createsGame('GameId1').named("TheFirstGame"))
     .expect("GameCreated").withName("TheFirstGame").isOk(done);
+  });
+
+  it('Should allow user to join a game', function (done) {
+    user().clearState();
+    given(user("YourUser").createsGame('GameId2').named('TheSecondGame'))
+    .and(user("OtherUser").joinsGame('GameId2'))
+    // .and(user("YourUser").placesMove('0', '0'))
+    // .and(user("OtherUser").placesMove('1', '1'))
+    .expect("GameJoined").withName("TheSecondGame").isOk(done);
   });
 
 });
