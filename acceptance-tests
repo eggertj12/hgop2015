@@ -2,44 +2,13 @@
 [0m[0m
 [0m  TEST ENV GET /api/gameHistory[0m
 [2K[0G  [32m  ✓[0m[90m Should have ACCEPTANCE_URL environment variable exported. [0m
-[2K[0G  [32m  ✓[0m[90m should execute same test using old style [0m[33m(69ms)[0m
-exp:  { id: '23456',
-  gameId: 'GameId1',
-  event: 'GameCreated',
-  userName: 'YourUser',
-  name: 'TheFirstGame',
-  timeStamp: '2015.12.08T13:15:12' }
-Executing: CreateGame on game: GameId1
-Command:  { id: '23456',
-  gameId: 'GameId1',
-  comm: 'CreateGame',
-  userName: 'YourUser',
-  name: 'TheFirstGame',
-  timeStamp: '2015.12.08T13:15:12' }
-[2K[0G  [32m  ✓[0m[90m Should execute fluid API test [0m
-exp:  { id: '23456',
-  gameId: 'GameId2',
-  event: 'GameJoined',
-  userName: 'OtherUser',
-  name: 'TheSecondGame',
-  timeStamp: '2015.12.08T13:15:12',
-  otherUserName: 'YourUser' }
-Executing: CreateGame on game: GameId2
-Command:  { id: '23456',
-  gameId: 'GameId2',
-  comm: 'CreateGame',
-  userName: 'YourUser',
-  name: 'TheSecondGame',
-  timeStamp: '2015.12.08T13:15:12' }
-Executing: JoinGame on game: GameId2
-Command:  { id: '23456',
-  gameId: 'GameId2',
-  comm: 'JoinGame',
-  name: 'TheSecondGame',
-  userName: 'OtherUser',
-  timeStamp: '2015.12.08T13:15:12' }
+
+[0m  TicTacToe API[0m
+[2K[0G  [32m  ✓[0m[90m should execute create game using old style [0m[33m(70ms)[0m
+[2K[0G  [32m  ✓[0m[90m Should execute fluid API test for Create game [0m
 [2K[0G  [32m  ✓[0m[90m Should allow user to join a game [0m
+[2K[0G  [32m  ✓[0m[90m Should get a drawn game if no winner [0m[31m(76ms)[0m
 
 
-[92m [0m[32m 4 passing[0m[90m (134ms)[0m
+[92m [0m[32m 5 passing[0m[90m (204ms)[0m
 

@@ -10,8 +10,6 @@ module.exports = function () {
 	function executeCommand(command) {
 		const deferred = q.defer();
 		const req = request(acceptanceUrl);
-		console.log('Executing: ' + command.comm + ' on game: ' + command.gameId);
-		console.log('Command: ', command);
 		req.post('/api/' + command.comm)
 			.type('json')
 			.send(command)
@@ -69,9 +67,7 @@ module.exports = function () {
 					expectedEvent.userName = currentUser.getJoinerName();
 					expectedEvent.otherUserName = currentUser.getOwnerName();
 				} 
-				
-				console.log('exp: ', expectedEvent);
-				
+								
 				executeCommands(commands)
 				.then(() => {
 

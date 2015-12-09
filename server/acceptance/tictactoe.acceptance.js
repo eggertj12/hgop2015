@@ -13,8 +13,10 @@ describe('TEST ENV GET /api/gameHistory', function () {
   it('Should have ACCEPTANCE_URL environment variable exported.', function () {
     acceptanceUrl.should.be.ok;
   });
+});
 
-  it('should execute same test using old style', function (done) {
+describe('TicTacToe API', function () {
+  it('should execute create game using old style', function (done) {
 
     var command = {
       id: "1234",
@@ -54,7 +56,7 @@ describe('TEST ENV GET /api/gameHistory', function () {
   });
 
 
-  it('Should execute fluid API test', function (done) {
+  it('Should execute fluid API test for Create game', function (done) {
     user().clearState();
     given(user("YourUser").createsGame('GameId1').named("TheFirstGame"))
     .expect("GameCreated").withName("TheFirstGame").isOk(done);
@@ -64,9 +66,23 @@ describe('TEST ENV GET /api/gameHistory', function () {
     user().clearState();
     given(user("YourUser").createsGame('GameId2').named('TheSecondGame'))
     .and(user("OtherUser").joinsGame('GameId2'))
-    // .and(user("YourUser").placesMove('0', '0'))
-    // .and(user("OtherUser").placesMove('1', '1'))
     .expect("GameJoined").withName("TheSecondGame").isOk(done);
+  });
+
+  it('Should get a drawn game if no winner', function (done) {
+    user().clearState();
+    given(user("YourUser").createsGame('GameId3').named('TheThirdGame'))
+    .and(user("OtherUser").joinsGame('GameId3'))
+    .and(user("YourUser").placesMove('1', '0'))
+    .and(user("OtherUser").placesMove('0', '0'))
+    .and(user("YourUser").placesMove('2', '1'))
+    .and(user("OtherUser").placesMove('2', '0'))
+    .and(user("YourUser").placesMove('1', '1'))
+    .and(user("OtherUser").placesMove('0', '1'))
+    .and(user("YourUser").placesMove('0', '2'))
+    .and(user("OtherUser").placesMove('1', '2'))
+    .and(user("YourUser").placesMove('2', '2'))
+    .expect("GameDrawn").withName("TheThirdGame").isOk(done);
   });
 
 });
