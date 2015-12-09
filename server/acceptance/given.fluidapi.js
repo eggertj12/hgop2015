@@ -34,7 +34,8 @@ module.exports = function () {
 		const condition = {
 			'event': '',
 			'gameId': user.getGameId(),
-			'gameName': user.getGameName()
+			'gameName': user.getGameName(),
+			'winnerName': ''
 		};
 		var commands = user.getCommands();
 		var currentUser = user;
@@ -53,6 +54,10 @@ module.exports = function () {
 				condition.gameName = gameName;
 				return givenAPI;
 			},
+			'withWinner': function (userName)  {
+				condition.winnerName = userName;
+				return givenAPI;
+			},
 			'isOk': (done) => {
 				const expectedEvent = {
 					"id": constants.testCmdId,
@@ -67,7 +72,11 @@ module.exports = function () {
 					expectedEvent.userName = currentUser.getJoinerName();
 					expectedEvent.otherUserName = currentUser.getOwnerName();
 				} 
-								
+
+				if (condition.event === 'GameWon') {
+					expectedEvent.winningPlayer = currentUser.getLastPlay();
+				} 
+
 				executeCommands(commands)
 				.then(() => {
 

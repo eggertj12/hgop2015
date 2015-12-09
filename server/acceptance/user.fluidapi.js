@@ -90,6 +90,9 @@ module.exports = function () {
 			'getJoinerName': function () {
 				return state.joinerName;
 			},
+			'getLastPlay': function () {
+				return (state.nextPlayer === 'X' ? 'Y' : 'X');
+			},
 			'clearState': function () {
 				state.commands = [];
 				state.nextPlayer = 'X';

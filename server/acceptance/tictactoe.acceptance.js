@@ -85,4 +85,16 @@ describe('TicTacToe API', function () {
     .expect("GameDrawn").withName("TheThirdGame").isOk(done);
   });
 
+  it('Should allow X to win a game on column', function (done) {
+    user().clearState();
+    given(user("YourUser").createsGame('GameId4').named('TheWinningGame'))
+    .and(user("OtherUser").joinsGame('GameId4'))
+    .and(user("YourUser").placesMove('1', '0'))
+    .and(user("OtherUser").placesMove('0', '0'))
+    .and(user("YourUser").placesMove('1', '1'))
+    .and(user("OtherUser").placesMove('0', '1'))
+    .and(user("YourUser").placesMove('1', '2'))
+    .expect("GameWon").withWinner("YourUser").isOk(done);
+  });
+
 });
