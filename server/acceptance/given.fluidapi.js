@@ -68,9 +68,14 @@ module.exports = function () {
 					"timeStamp": constants.testTimeStamp
 				};
 				
+				if (condition.event === 'GameCreated') {
+					expectedEvent.player = 'X'
+				} 
+
 				if (condition.event === 'GameJoined') {
 					expectedEvent.userName = currentUser.getJoinerName();
 					expectedEvent.otherUserName = currentUser.getOwnerName();
+					expectedEvent.player = 'O'
 				} 
 
 				if (condition.event === 'GameWon') {
