@@ -1,15 +1,15 @@
 
+[0m[0m
+[0m  TEST ENV GET /api/gameHistory[0m
+[2K[0G  [32m  ✓[0m[90m Should have ACCEPTANCE_URL environment variable exported. [0m
 
-  TEST ENV GET /api/gameHistory
-    ✓ Should have ACCEPTANCE_URL environment variable exported. 
-
-  TicTacToe API
-    ✓ should execute create game using old style (84ms)
-    ✓ Should execute fluid API test for Create game 
-    ✓ Should allow user to join a game 
-    ✓ Should get a drawn game if no winner (74ms)
-    ✓ Should allow X to win a game on column (50ms)
+[0m  TicTacToe API[0m
+[2K[0G  [32m  ✓[0m[90m should execute create game using old style [0m[33m(74ms)[0m
+[2K[0G  [32m  ✓[0m[90m Should execute fluid API test for Create game [0m
+[2K[0G  [32m  ✓[0m[90m Should allow user to join a game [0m
+[2K[0G  [32m  ✓[0m[90m Should get a drawn game if no winner [0m[33m(73ms)[0m
+[2K[0G  [32m  ✓[0m[90m Should allow X to win a game on column [0m[33m(44ms)[0m
 
 
-  6 passing (267ms)
+[92m [0m[32m 6 passing[0m[90m (252ms)[0m
 
