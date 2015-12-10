@@ -59,20 +59,17 @@ describe('TicTacToe API', function () {
 
 
   it('Should execute fluid API test for Create game', function (done) {
-    user().clearState();
     given(user("YourUser").createsGame('GameId1').named("TheFirstGame"))
     .expect("GameCreated").withName("TheFirstGame").isOk(done);
   });
 
   it('Should allow user to join a game', function (done) {
-    user().clearState();
     given(user("YourUser").createsGame('GameId2').named('TheSecondGame'))
     .and(user("OtherUser").joinsGame('GameId2'))
     .expect("GameJoined").withName("TheSecondGame").isOk(done);
   });
 
   it('Should get a drawn game if no winner', function (done) {
-    user().clearState();
     given(user("YourUser").createsGame('GameId3').named('TheThirdGame'))
     .and(user("OtherUser").joinsGame('GameId3'))
     .and(user("YourUser").placesMove('1', '0'))
@@ -88,7 +85,6 @@ describe('TicTacToe API', function () {
   });
 
   it('Should allow X to win a game on column', function (done) {
-    user().clearState();
     given(user("YourUser").createsGame('GameId4').named('TheWinningGame'))
     .and(user("OtherUser").joinsGame('GameId4'))
     .and(user("YourUser").placesMove('1', '0'))

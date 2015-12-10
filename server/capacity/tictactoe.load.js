@@ -1,10 +1,10 @@
-var user = require('../fluidapi/user.fluidapi.js').user;
-var given = require('../fluidapi/given.fluidapi.js').given;
+var user = require('../fluidapi/user.fluidapi.js').user();
+var given = require('../fluidapi/given.fluidapi.js').given();
 
-it('Should play 1 games in x seconds.', function (done) {
+it('Should play 100 games in 5 seconds.', function (done) {
   var doneCount = 0;
-  var gamesToPlay = 1;
-  var x = 6;
+  var gamesToPlay = 100;
+  var x = 5;
 
   this.timeout(x * 1000);
 
