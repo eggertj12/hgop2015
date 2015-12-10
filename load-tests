@@ -1,6 +1,6 @@
 
-[0m[0m
-[2K[0G[32m  ✓[0m[90m Should play 100 games in 5 seconds. [0m[31m(4307ms)[0m
 
-[92m [0m[32m 1 passing[0m[90m (4s)[0m
+  ✓ Should play 150 games in 8 seconds. (7306ms)
+
+  1 passing (7s)
 

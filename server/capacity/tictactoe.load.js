@@ -1,10 +1,13 @@
-var user = require('../fluidapi/user.fluidapi.js').user();
-var given = require('../fluidapi/given.fluidapi.js').given();
+const user = require('../fluidapi/user.fluidapi.js').user();
+const given = require('../fluidapi/given.fluidapi.js').given();
 
-it('Should play 100 games in 5 seconds.', function (done) {
+const gameCount = process.env.CAPACITY_GAME_COUNT || 100;
+const timeLimit = process.env.CAPACITY_TIME_LIMIT || 5;
+
+it('Should play ' + gameCount + ' games in ' + timeLimit + ' seconds.', function (done) {
   var doneCount = 0;
-  var gamesToPlay = 100;
-  var x = 5;
+  const gamesToPlay = Number.parseInt(gameCount);
+  const x = timeLimit;
 
   this.timeout(x * 1000);
 
