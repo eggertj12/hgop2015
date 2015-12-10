@@ -4,8 +4,8 @@ const should = require('should');
 const request = require('supertest');
 const acceptanceUrl = process.env.ACCEPTANCE_URL;
 
-const user = require('../fluidapi/user.fluidapi.js')();
-const given = require('../fluidapi/given.fluidapi.js')();
+const user = require('../fluidapi/user.fluidapi.js').user();
+const given = require('../fluidapi/given.fluidapi.js').given();
 const constants = require('../fluidapi/constants.fluidapi')();
 
 describe('TEST ENV GET /api/gameHistory', function () {

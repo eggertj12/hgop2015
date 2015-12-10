@@ -1,4 +1,4 @@
-module.exports = function () {
+function given () {
 	const constants = require('./constants.fluidapi')();
 
 	const should = require('should');
@@ -7,6 +7,11 @@ module.exports = function () {
 	
 	const acceptanceUrl = process.env.ACCEPTANCE_URL;
 	
+	// ------------------------------------------------
+	// Helper functions
+	// ------------------------------------------------
+	
+	// Wrap a single command in a promise and execute it
 	function executeCommand(command) {
 		const deferred = q.defer();
 		const req = request(acceptanceUrl);
@@ -22,6 +27,7 @@ module.exports = function () {
 		return deferred.promise;
 	}
 	
+	// Takes a list of commands and executes them sequentially
 	function executeCommands(commands) {
 		return commands.reduce(function(promise, command) {
 			return promise.then(function(result) {
@@ -30,64 +36,91 @@ module.exports = function () {
 		}, q());		
 	}
 
+	// ------------------------------------------------
+	// Actual API function
+	// ------------------------------------------------
+
 	return function given(user) {
-		const condition = {
-			'event': '',
-			'gameId': user.getGameId(),
-			'gameName': user.getGameName(),
-			'winnerName': ''
-		};
-		var commands = user.getCommands();
-		var currentUser = user;
 
 		var givenAPI = {
+			'condition': {
+				'event': '',
+				'gameId': user.getCommand().gameId,
+				'gameName': user.getCommand().name,
+				'winnerName': ''
+			}, 
+			'commands': [user.getCommand()],
+			'state': {
+				'gameId': user.getCommand().gameId,
+				'ownerName': user.getUserName(),
+				'gameName': user.getCommand().name,
+				'currentUser': user,
+				'nextPlayer': 'X'
+			},
 			'and': function (user) {
-				commands = user.getCommands();
-				currentUser = user;
+				givenAPI.state.currentUser = user;
+				
+				const newCommand = user.getCommand();
+				
+				if (user.getCommand().comm === 'JoinGame') {
+					newCommand.name = givenAPI.state.gameName;
+
+					givenAPI.state.joinerName = user.getUserName();
+				}
+
+				if (user.getCommand().comm === 'PlaceMove') {
+					newCommand.gameId = givenAPI.state.gameId;
+					newCommand.name = givenAPI.state.gameName;
+					newCommand.player = givenAPI.state.nextPlayer;
+
+					givenAPI.state.nextPlayer = (givenAPI.state.nextPlayer === 'X' ? 'Y' : 'X');
+				}
+
+				givenAPI.commands.push(newCommand);
 				return givenAPI;
 			},
 			'expect': function (event) {
-				condition.event = event;
+				givenAPI.condition.event = event;
 				return givenAPI;
 			},
 			'withName': function (gameName)  {
-				condition.gameName = gameName;
+				givenAPI.condition.gameName = gameName;
 				return givenAPI;
 			},
 			'withWinner': function (userName)  {
-				condition.winnerName = userName;
+				givenAPI.condition.winnerName = userName;
 				return givenAPI;
 			},
 			'isOk': (done) => {
 				const expectedEvent = {
 					"id": constants.testCmdId,
-					"gameId": currentUser.getGameId(),
-					"event": condition.event,
-					"userName": user.getUserName(),
-					"name": condition.gameName,
+					"gameId": givenAPI.state.gameId,
+					"event": givenAPI.condition.event,
+					"userName": givenAPI.state.currentUser.getUserName(),
+					"name": givenAPI.condition.gameName,
 					"timeStamp": constants.testTimeStamp
 				};
 				
-				if (condition.event === 'GameCreated') {
+				if (givenAPI.condition.event === 'GameCreated') {
 					expectedEvent.player = 'X'
 				} 
 
-				if (condition.event === 'GameJoined') {
-					expectedEvent.userName = currentUser.getJoinerName();
-					expectedEvent.otherUserName = currentUser.getOwnerName();
+				if (givenAPI.condition.event === 'GameJoined') {
+					expectedEvent.userName = givenAPI.state.joinerName;
+					expectedEvent.otherUserName = givenAPI.state.ownerName;
 					expectedEvent.player = 'O'
 				} 
 
-				if (condition.event === 'GameWon') {
-					expectedEvent.winningPlayer = currentUser.getLastPlay();
+				if (givenAPI.condition.event === 'GameWon') {
+					expectedEvent.winningPlayer = (givenAPI.state.nextPlayer === 'X' ? 'Y' : 'X');
 				} 
 
-				executeCommands(commands)
+				executeCommands(givenAPI.commands)
 				.then(() => {
 
 					// Load the game history and verify that it fulfills the conditions
 					request(acceptanceUrl)
-						.get('/api/gameHistory/' + user.getGameId())
+						.get('/api/gameHistory/' + givenAPI.state.gameId)
 						.expect(200)
 						.expect('Content-Type', /json/)
 						.end(function (err, res) {
@@ -104,3 +137,5 @@ module.exports = function () {
 		return givenAPI;
 	}
 }
+
+module.exports.given = given;

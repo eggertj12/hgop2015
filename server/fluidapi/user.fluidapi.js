@@ -1,20 +1,23 @@
-module.exports = function () {
+function user () {
 	const constants = require('./constants.fluidapi')();
 	
-	const state = {
-		'commands': [],
-		'nextPlayer': 'X',
-		'gameId': '',
-		'gameName': '',
-		'ownerName': '',
-		'joinerName': ''
-	}
-	
+	// const state = {
+	// 	'commands': [],
+	// 	'nextPlayer': 'X',
+	// 	'gameId': '',
+	// 	'gameName': '',
+	// 	'ownerName': '',
+	// 	'joinerName': ''
+	// }
+
 	return function user(userName) {
 		var userApi = {
+			'state': {
+				'command': {},
+				'gameId': ''
+			}, 
 			'createsGame': function (gameId) {
-				state.gameId = gameId;
-				state.ownerName = userName;
+				userApi.state.gameId = gameId;
 				var command = {
 					id: constants.testCmdId,
 					gameId: gameId,
@@ -23,85 +26,61 @@ module.exports = function () {
 					name: '',
 					timeStamp: constants.testTimeStamp
 				};
-				state.commands.push(command);
+				userApi.state.command = command;
 
 				return userApi;
 			},
 			'named': function (gameName) {
-				state.gameName = gameName;
-				// Assume the first command is createGame command
-				try {
-					state.commands[0].name = gameName;
-				} catch(e) {
-					console.log(e);
-				}
-
+				userApi.state.command.name = gameName;
 				return userApi;
 			},
 			'joinsGame': function (gameId) {
-				state.gameId = gameId;
-				state.joinerName = userName;
+				userApi.state.gameId = gameId;
 				var command = {
 					id: constants.testCmdId,
 					gameId: gameId,
 					comm: "JoinGame",
-					name: state.gameName,
+					name: '',
 					userName: userName,
 					timeStamp: constants.testTimeStamp
 				};
-
-				state.commands.push(command);
+				userApi.state.command = command;
 
 				return userApi;
 			},
 			'placesMove': function (x, y) {
 				var command = {
 					id: constants.testCmdId,
-					gameId: state.gameId,
+					gameId: '',
 					comm: "PlaceMove",
 					boardX: x,
 					boardY: y,
-					player: state.nextPlayer,
+					player: '',
 					userName: userName,
-					name: state.gameName,
+					name: '',
 					timeStamp: constants.testTimeStamp
 				};
 
-				state.commands.push(command);
-				state.nextPlayer = (state.nextPlayer === 'X' ? 'Y' : 'X');
+				userApi.state.command = command;
 
 				return userApi;
 			},
-			'getCommands': function () {
-				return state.commands;
+			'getCommand': function () {
+				return userApi.state.command;
 			},
 			'getGameId': function () {
-				return state.gameId;
-			},
-			'getGameName': function () {
-				return state.gameName;
+				return userApi.state.gameId;
 			},
 			'getUserName': function () {
 				return userName;
 			},
-			'getOwnerName': function () {
-				return state.ownerName;
-			},
-			'getJoinerName': function () {
-				return state.joinerName;
-			},
-			'getLastPlay': function () {
-				return (state.nextPlayer === 'X' ? 'Y' : 'X');
-			},
 			'clearState': function () {
-				state.commands = [];
-				state.nextPlayer = 'X';
-				state.gameId = '';
-				state.gameName = '';
-				state.userName = '';
-				state.otherUserName = '';
+				userApi.state.commands = [];
+				userApi.state.gameId = '';
 			}
 		}
 		return userApi;
 	}
 }
+
+module.exports.user = user;

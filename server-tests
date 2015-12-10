@@ -2,9 +2,9 @@
 [0m[0m
 Express server listening on 9000, in test mode
 [0m  GET /api/gameHistory[0m
-[90mPOST /api/createGame [32m200 [90m28ms - 140b[0m
+[90mPOST /api/createGame [32m200 [90m29ms - 140b[0m
 [90mGET /api/gameHistory/999 [32m200 [90m3ms - 140b[0m
-[2K[0G  [32m  ✓[0m[90m should respond with JSON array with created events for game [0m[31m(256ms)[0m
+[2K[0G  [32m  ✓[0m[90m should respond with JSON array with created events for game [0m[31m(269ms)[0m
 
 [0m  In memory store[0m
 [2K[0G  [32m  ✓[0m[90m Should return empty array for unknown id [0m
@@ -13,7 +13,7 @@ Express server listening on 9000, in test mode
 
 [0m  tictactoe game context[0m
 [2K[0G  [32m  ✓[0m[90m should route command to instantiated tictactoe game with event stream from store and return and store generated events. Test using fakes/stubs. [0m
-[2K[0G  [32m  ✓[0m[90m should route command to instantiated tictactoe game with event stream from store and return generated events, using mock style tests. [0m[33m(73ms)[0m
+[2K[0G  [32m  ✓[0m[90m should route command to instantiated tictactoe game with event stream from store and return generated events, using mock style tests. [0m[31m(133ms)[0m
 
 [0m  create game command[0m
 [2K[0G  [32m  ✓[0m[90m should create game [0m
@@ -38,5 +38,5 @@ Express server listening on 9000, in test mode
 [2K[0G  [32m  ✓[0m[90m should allow game to be drawn [0m
 
 
-[92m [0m[32m 22 passing[0m[90m (382ms)[0m
+[92m [0m[32m 22 passing[0m[90m (466ms)[0m
 
