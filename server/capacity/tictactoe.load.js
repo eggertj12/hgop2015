@@ -18,8 +18,8 @@ it('Should play ' + gameCount + ' games in ' + timeLimit + ' seconds.', function
   };
 
   for (var gameId = 0; gameId < gamesToPlay; gameId++) {
-    user().clearState();
     given(user("YourUser").createsGame('Game' + gameId).named('TestGameNumber-' + gameId))
+    // .expect("GameCreated").withName('TestGameNumber-' + gameId).isOk(QED);
     .and(user("OtherUser").joinsGame('Game' + gameId))
     .and(user("YourUser").placesMove('1', '0'))
     .and(user("OtherUser").placesMove('0', '0'))
