@@ -20,6 +20,7 @@ function given () {
 			.send(command)
 			.end((err, res) => {
 				if (err) {
+					console.log('Error posting commmand "' + command.comm + '": ', err);
 					deferred.reject(err);
 				}
 				deferred.resolve(res);

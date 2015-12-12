@@ -23,11 +23,6 @@ set -e
 set -o pipefail
 
 echo
-echo Pushing development docker
-echo --------------------------
-docker login -u eggert && docker push eggert/hgop2015
-
-echo
 echo Pulling docker image into test
 echo ------------------------------
 
@@ -45,6 +40,11 @@ if [ "$STAGE" = "Acceptance" ]; then
 	echo
 	echo Running acceptance testing
 	echo --------------------------
+
+	# Add reporting options
+	export MOCHA_REPORTER=xunit
+	export MOCHA_REPORT=server-tests.xml
+
 	grunt mochaTest:acceptance
 
 	echo

@@ -1,15 +1,50 @@
-
-
-  TEST ENV GET /api/gameHistory
-    ✓ Should have ACCEPTANCE_URL environment variable exported. 
-
-  TicTacToe API
-    ✓ should execute create game using old style (68ms)
-    ✓ Should execute fluid API test for Create game 
-    ✓ Should allow user to join a game 
-    ✓ Should get a drawn game if no winner (87ms)
-    ✓ Should allow X to win a game on column (61ms)
-
-
-  6 passing (266ms)
-
+Executing command:  CreateGame
+posting to:  http://192.168.50.12:9000
+Executing command:  CreateGame
+posting to:  http://192.168.50.12:9000
+Executing command:  JoinGame
+posting to:  http://192.168.50.12:9000
+Executing command:  CreateGame
+posting to:  http://192.168.50.12:9000
+Executing command:  JoinGame
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+Executing command:  CreateGame
+posting to:  http://192.168.50.12:9000
+Executing command:  JoinGame
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+Executing command:  PlaceMove
+posting to:  http://192.168.50.12:9000
+<testsuite name="Mocha Tests" tests="6" failures="0" errors="0" skipped="0" timestamp="Sat, 12 Dec 2015 20:13:13 GMT" time="0.25">
+<testcase classname="TEST ENV GET /api/gameHistory" name="Should have ACCEPTANCE_URL environment variable exported." time="0"/>
+<testcase classname="TicTacToe API" name="should execute create game using old style" time="0.074"/>
+<testcase classname="TicTacToe API" name="Should execute fluid API test for Create game" time="0.017"/>
+<testcase classname="TicTacToe API" name="Should allow user to join a game" time="0.019"/>
+<testcase classname="TicTacToe API" name="Should get a drawn game if no winner" time="0.075"/>
+<testcase classname="TicTacToe API" name="Should allow X to win a game on column" time="0.052"/>
+</testsuite>

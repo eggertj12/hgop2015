@@ -3,7 +3,7 @@
 # Require environment variables
 # Target server IP
 : "${TEST_TARGET:?Need to set TEST_TARGET environment variable to target machine IP address}"
-: "${CAPACITY_URL:?Need to set CAPACITY_URL environment variable to testing url}"
+: "${ACCEPTANCE_URL:?Need to set ACCEPTANCE_URL environment variable to testing url}"
 
 # Optional config environment variables are $CAPACITY_GAME_COUNT and #CAPACITY_TIME_LIMIT
 
@@ -19,6 +19,11 @@ ssh vagrant@$TEST_TARGET 'docker restart $(docker ps -q)'
 echo
 echo Running load testing
 echo --------------------
+
+# Add reporting options
+export MOCHA_REPORTER=xunit
+export MOCHA_REPORT=server-tests.xml
+
 grunt mochaTest:load
 
 echo
