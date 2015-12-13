@@ -18,7 +18,9 @@ require('./routes')(app, config);
 
 // Start server
 server.listen(config.port, config.ip, function () {
-  console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+  if (app.get('env') !== 'test') {
+    console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
+  }
 });
 
 app.appName ="TicTacToe";
