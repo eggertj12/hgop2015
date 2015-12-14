@@ -1,6 +1,7 @@
 node_modules/
 public
 testreports
+server-tests.xml
 .tmp
 .idea
 client/bower_components
