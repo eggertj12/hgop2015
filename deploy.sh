@@ -42,6 +42,7 @@ echo ----------------------------------------
 # ssh vagrant@$DEPLOY_TARGET 'docker pull eggert/hgop2015 && docker run -p 9000:8080 -d -e "NODE_ENV=production" eggert/hgop2015'
 
 scp provisioning/production/docker-pull-version.sh vagrant@$DEPLOY_TARGET:~/docker-pull-version.sh
+ssh vagrant@$DEPLOY_TARGET chmod a+x ~/docker-pull-version.sh
 ssh vagrant@$DEPLOY_TARGET ~/docker-pull-version.sh $1 $2
 
 if [ "$STAGE" = "Acceptance" ]; then
@@ -55,9 +56,6 @@ if [ "$STAGE" = "Acceptance" ]; then
 
 	grunt mochaTest:acceptance
 	
-	# Make test results accessible in Jenkins workspace
-	cp *.xml "$WORKSPACE"
-
 	echo
 	echo Restart docker for a fresh start
 	echo --------------------------------

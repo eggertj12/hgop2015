@@ -26,9 +26,6 @@ export MOCHA_REPORT=server-tests.xml
 
 grunt mochaTest:load
 
-# Make test results accessible in Jenkins workspace
-cp *.xml "$WORKSPACE"
-
 echo
 echo Restart docker again just for good measure
 echo ------------------------------------------
