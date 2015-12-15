@@ -54,6 +54,7 @@ if [ "$STAGE" = "Acceptance" ]; then
 	export MOCHA_REPORTER=xunit
 	export MOCHA_REPORT=server-tests.xml
 
+	npm install
 	grunt mochaTest:acceptance
 	
 	echo
