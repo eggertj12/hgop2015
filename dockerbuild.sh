@@ -18,8 +18,8 @@ rm -rf ./dist
 
 if [ -z "$GIT_COMMIT" ]; then
   export GIT_COMMIT=$(git rev-parse HEAD)
-  export GIT_URL=$(git config --get remote.origin.url)
 fi
+export GIT_URL=$(git config --get remote.origin.url)
 
 echo Building app
 grunt
