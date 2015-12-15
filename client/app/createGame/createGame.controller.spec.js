@@ -34,10 +34,7 @@ describe('Controller: CreateGameCtrl', function () {
       id: '12345',
       gameId: '98765',
       comm: 'CreateGame',
-      user: {
-        userName: 'Gummi',
-        side: 'X'
-      },
+      userName: 'Gummi',
       name: 'TheSecondGame',
       timeStamp: '2014-12-02T11:29:29'
     }).respond([
@@ -45,10 +42,8 @@ describe('Controller: CreateGameCtrl', function () {
           id: '12345',
           gameId: '98765',
           event: 'GameCreated',
-          user: {
-            userName: 'Gummi',
-            side: 'X'
-          }
+          userName: 'Gummi',
+          player: 'X'
         }
       ]
     );
