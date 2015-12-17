@@ -52,6 +52,12 @@ bower hefur sambærilegt hlutverk og npm í ferlinu. Það er hinsvegar sá gall
   
 Ferli útgáfu er þannig að kóða er ýtt upp á GitHub. Jenkins CI á build vél fylgist með github safninu. Þegar breyting hefur orðið þá sækir hann nýja útgáfu af kóðanum, byggir hann, keyrir einingapróf og byggir svo að lokum nýja docker mynd með verkefninu. Ef bygging hefur tekist þá keyrist sjálfkrafa útgáfa á nýbyggðu docker myndinni yfir á prófunarvélina.
 
+Seinni þættir í verkefninu hafa svo bætt við sjálfvirkri keyrslu á viðtökuprófum og álagsprófunum sem keyrðar eru eftir að bygging verkefnis hefur tekist.
+
+## Viðbót við verkefni á 10. degi
+
+Úbúin var ný vagrant sýndarvél með því að pakka prófunarvélinni sem komin var í nýtt vagrant box. Sú vél er sett upp til að vera „production“ vél. Skriftur gera þó mögulegt að keyra bæði prófanirnar og rekstur á sömu vélinni með því að nota sitthvort portið.
+
 # Álagsprófanir (Capacity testing)
 
 Álagsprófunum var bætt við á degi 9. Þær keyra ákveðinn fjölda leikja til enda í jafntefli með viðtökuprófana útfærslunni. Afköst þjónustunnar komu mér á óvart, á þann hátt að þau virðast vera lakari en ég hefði giskað á. Prófanirnar sýna nokkuð stöðugt að hver leikur taki í heildina um 40 - 45ms frá byrjun til enda. Það eru 11 skipanir / fyrirspurnir sem þarf til að spila einn leik til enda sem þýðir að hver fyrirspurn tekur um 4ms að meðaltali. Þetta eru kannski tölur sem eru eðlilegar keyrandi á milli tveggja sýndarvéla á ekkert allt of öflugum vélbúnaði en ég átti samt von á að geta séð mun fleiri leiki keyrða fyrirfram. Prófunar skrefið í útgáfupípunni var sett upp til að keyra 150 leiki sem tekur um 6,5 - 7 sek og tímaviðmið sett á 8 sek.
@@ -59,5 +65,63 @@ Ferli útgáfu er þannig að kóða er ýtt upp á GitHub. Jenkins CI á build 
 Fyrrnefndar tölur voru miðað við ákveðið ástand á vélunum sem koma við sögu í ferlinu, við frekari prófanir reyndist nauðsynlegt að hækka viðmiðstímann í 9 sek til að fá prófin til að keyra stöðugt.
 
 ## Samtíma keyrsla álagsprófa
+
 Node.js keyrir á einum þræði (single threaded) en nýtir ósamstillta (asynchronous) keyrslu fyrir allar inn- / úttaksaðgerðir eins og fyrirspurnir yfir net. Álagsprófin eins og þau eru upp lögð núna keyra því samhliða, þ.e. lykkjan sem setur leikina af stað byggir upp skipanirnar fyrir einn leik og um leið og fyrsta skipunin hefur verið send á vefþjónustuna losnar þráður node.js til að halda áfram að setja næsta leik af stað.
 Ekki reyndist þörf á að googla til að staðfesta þessa hegðun því hún kom berlega í ljós um leið og fyrsta tilraun var gerð til að keyra álagsprófin. Reiprennandi (Fluid) apinn fyrir viðtökuprófanirnar hafði verið skrifaður þannig að hann treysti á samstillta (synchronous) keyrslu prófa til að viðhalda stöðu rétt og þurfti að endurskrifast með gáfulegri aðferðum.
+
+# Útgáfa hvaða útgáfu sem er
+
+Viðbætur 10.dags gefa möguleika á að keyra viðtöku- og álagsprófanir ásamt því að senda í rekstur eldri útgáfur verkefnisins. 
+
+Þetta gefur möguleika fyrir t.d. þjónustuborð og prófara til að keyra ákveðna eldri útgáfu og bera saman við aðrar eða finna vandamál í nákvæmlega réttri útgáfu. (Hversu marga ætli þurfi að hafa á þjónustuborðinu fyrir TicTacToe?) Einnig er hægt að sjá nákvæmlega hvaða commit á git er á bakvið viðkomandi útgáfu og þar með að fá rekjanleika nákvæmlega aftur í hver gerði hvaða breytingu og þar með rekja betur ástæður ef vandamál koma upp.
+
+Ástæðan fyrir að hafa docker push skipunina í byggingu verkefnisins er sú að sú skipun er hluti af ferlinu að byggja „binary“ pakka og koma honum fyrir í kóðasafni. Með þessu móti geta deploy skriftur sótt á ákveðinn stað tilbúinn og óbreytanlegan pakka til að gefa út á mismunandi mörk (target).
+
+Þessi virkni er útfærð með því að Commit stage vistar hash fyrir git commit-ið og docker myndin sem byggð er og send á dockerhub er merkt með því. Áframhaldandi skref í pípunni lesa svo þetta hash og nota það til að sækja réttu myndina á dockerhub. Jenkins sér um að þessi tiltekna keyrsla hvers skrefs hefur vísun í hash-ið og þar með er alltaf hægt að keyra aftur og sækja nákvæmlega sömu útgáfu.
+
+# Jenkins skriftur
+
+## Commit stage
+
+```bash
+export PATH=$PATH:/usr/local/bin
+# XVFB is set up to expose virtual framebuffer as display 99
+export DISPLAY=:99
+
+./build.sh
+```
+
+## Acceptance stage
+
+```bash
+export PATH=$PATH:/usr/local/bin
+export DEPLOY_TARGET="192.168.50.12";
+export ACCEPTANCE_URL="http://192.168.50.12:9000";
+export STAGE="Acceptance";
+export GIT_UPSTREAM_HASH=$(<dist/githash.txt)
+
+./deploy.sh $GIT_UPSTREAM_HASH 9000
+```
+
+## Capacity stage
+
+```bash
+export PATH=$PATH:/usr/local/bin
+export TEST_TARGET="192.168.50.12";
+export ACCEPTANCE_URL="http://192.168.50.12:9000";
+export CAPACITY_GAME_COUNT="150";
+export CAPACITY_TIME_LIMIT="9";
+
+./load-test.sh
+```
+
+## Production stage
+
+```bash
+export PATH=$PATH:/usr/local/bin
+export DEPLOY_TARGET="192.168.50.13";
+export STAGE="Production";
+export GIT_UPSTREAM_HASH=$(<dist/githash.txt)
+
+./deploy.sh $GIT_UPSTREAM_HASH 9000
+```
