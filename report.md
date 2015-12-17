@@ -96,11 +96,12 @@ export DISPLAY=:99
 ```bash
 export PATH=$PATH:/usr/local/bin
 export DEPLOY_TARGET="192.168.50.12";
+export PORT="9000";
 export ACCEPTANCE_URL="http://192.168.50.12:9000";
 export STAGE="Acceptance";
 export GIT_UPSTREAM_HASH=$(<dist/githash.txt)
 
-./deploy.sh $GIT_UPSTREAM_HASH 9000
+./deploy.sh $GIT_UPSTREAM_HASH $PORT
 ```
 
 ## Capacity stage
@@ -120,8 +121,9 @@ export CAPACITY_TIME_LIMIT="9";
 ```bash
 export PATH=$PATH:/usr/local/bin
 export DEPLOY_TARGET="192.168.50.13";
+export PORT="9000"
 export STAGE="Production";
 export GIT_UPSTREAM_HASH=$(<dist/githash.txt)
 
-./deploy.sh $GIT_UPSTREAM_HASH 9000
+./deploy.sh $GIT_UPSTREAM_HASH $PORT
 ```
